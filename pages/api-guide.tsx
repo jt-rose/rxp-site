@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 
 import React, { useState } from "react";
 import { APIKeyData, APIData } from "../utils/APIData";
+import { CodeSample } from "../utils/CodeSample";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
@@ -77,9 +78,10 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
         <p>{APIKeyInfo.description}</p>
         <br />
         {APIKeyInfo.samples.map((x) => (
-          <p key={`sample-${x.sample}`}>
+          /*<p key={`sample-${x.sample}`}>
             <code>{x.sample}</code> =`{">"}` <code>{x.result}</code>
-          </p>
+        </p>*/
+        <CodeSample sample={x.sample + " // " + x.result} />
         ))}
       </div>
       </div>
@@ -117,7 +119,7 @@ const AccordionSection = (props: { section: APISection}) => {
   const {section} = props; 
 
   return (
-    <section key={`section-${section.title}`} className="api-section">
+    <section key={`section-${section.title}`} id={section.title.toLowerCase().replace(" ", "-")} className="api-section">
       <div className="section-title-container">
       <div className="section-title" onClick={() => togglePanels(!showPanels)}>
           <h3>{section.title}</h3>

@@ -80,7 +80,7 @@ sample.isOptional.construct() // /(?:sample)?/`} />
       <p>
       There are a large number of modifiers available to give full 
       coverage to regex behavior. You can review these individually 
-      on the <Link href="/api-guide">API page</Link>.
+      on the <Link href="/api-guide#rxp-method">API page</Link>.
       </p>
       <p>
       By default, groups are noncapturing and searches are lazy, 
@@ -136,7 +136,7 @@ anyLetter.atEnd.construct() // /(?:\w)$/ equiv`} />
       <CodeSample sample={`init("\\d").construct // XXX /\\\\d/
 init(/\\d/).construct() // good /\\d/`} />
       <p>
-      A full list of presets can be found on the <Link href="/api-guide">API page</Link>.
+      A full list of presets can be found on the <Link href="/api-guide#presets">API page</Link>.
       </p>
   </GuideSection>
 );
@@ -152,7 +152,7 @@ const ShorthandsGuide = () => (
       </p>
       <CodeSample sample={`init(optional("("), "text", optional(")").construct() // /(?:\()?text(?:\))?/`} />
       <p>
-      A variety of shorthands are available and can be found on the <Link href="/api-guide">API page</Link>. 
+      A variety of shorthands are available and can be found on the <Link href="/api-guide#shorthands">API page</Link>. 
       All of these produce the standard RXP constructor object with the unique 
       exceptions of ‘withBoundaries’ and ‘wrapRXP’.
       </p>

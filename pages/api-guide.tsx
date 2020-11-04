@@ -77,12 +77,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
       <div className="accordion-panel-content">
         <p>{APIKeyInfo.description}</p>
         <br />
-        {APIKeyInfo.samples.map((x) => (
-          /*<p key={`sample-${x.sample}`}>
-            <code>{x.sample}</code> =`{">"}` <code>{x.result}</code>
-        </p>*/
-        <CodeSample sample={x.sample + " // " + x.result} />
-        ))}
+        <CodeSample sample={APIKeyInfo.codeSample} />
       </div>
       </div>
       <style jsx>{`

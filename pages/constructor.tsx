@@ -9,7 +9,6 @@ const AboutPage = () => (
     </h3>
     <div className="playground-container">
     <iframe src="https://codesandbox.io/embed/rxp-sample-ks16u?fontsize=14&hidenavigation=1&module=%2Fsrc%2FRXP-Sample.js&theme=dark"
-     style={{width: "90%", height: "500px", border: "0", borderRadius: "4px", overflow: "hidden"}}
      title="RXP-Sample"
      allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
      sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
@@ -19,6 +18,12 @@ const AboutPage = () => (
 .playground-container {
   display: flex;
   justify-content: center;
+}
+iframe {
+  width: 90%;
+  height: 500px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 `}</style>
   </Layout>

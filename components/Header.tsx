@@ -42,8 +42,8 @@ const siteLinks = [
     icon: "",
   },
   {
-    pageTitle: "Constructor",
-    path: "/constructor",
+    pageTitle: "Playground",
+    path: "/playground",
     icon: "",
   },
 ];

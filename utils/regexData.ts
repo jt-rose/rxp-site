@@ -1,7 +1,10 @@
-interface RegexDataObj {
+interface SpecialCharData {
     symbol: string;
     name: string;
     description: string;
+}
+
+interface RegexDataObj extends SpecialCharData {
     example: string;
 }
 
@@ -115,3 +118,46 @@ export const regexData: RegexDataObj[] = [
         example: "(?<var>)\\d{2}) and \\k<var>"
     },
 ];
+
+export const specialCharData: SpecialCharData[] = [
+    {
+        symbol: ".",
+        name: "anyCharacter",
+        description: "matches any single character"
+    },
+    {
+        symbol: "[^...]",
+        name: "not specified character",
+        description: "matches any single character not listed between '[^' and ']'"
+    },
+    {
+        symbol: "\\d",
+        name: "anyDigit",
+        description: "matches any single digit"
+    },
+    {
+        symbol: "\\D",
+        name: "non-digit",
+        description: "matches any single character that is not a digit"
+    },
+    {
+        symbol: "\\w",
+        name: "any letter",
+        description: "matches any single letter"
+    },
+    {
+        symbol: "\\W",
+        name: "non-digit",
+        description: "matches any single character that is not a letter"
+    },
+    {
+        symbol: "\\s",
+        name: "space",
+        description: "matches a space between characters such as ' '"
+    },
+    {
+        symbol: "\\b",
+        name: "word boundary",
+        description: "marks a text as having a boundary, such as a space or start of the text"
+    },
+]

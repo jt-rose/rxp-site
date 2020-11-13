@@ -33,12 +33,12 @@ const siteLinks = [
   },
   {
     pageTitle: "API",
-    path: "/api-guide",
+    path: "/api",
     icon: "",
   },
   {
-    pageTitle: "Regex-Guide",
-    path: "/regex-guide",
+    pageTitle: "Regex",
+    path: "/regex",
     icon: "",
   },
   {

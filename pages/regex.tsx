@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import theme from "../styles/theme";
 
 import { regexData, specialCharData } from "../utils/regexData";
 
@@ -57,7 +58,7 @@ const RegexGuidePage = () => (
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
         }
         thead tr {
-          background-color: #009879;
+          background-color: ${theme.colors.background};
           color: #ffffff;
           text-align: left;
         }
@@ -73,11 +74,11 @@ const RegexGuidePage = () => (
       }
       
       tbody tr:last-of-type {
-          border-bottom: 2px solid #009879;
+          border-bottom: 2px solid ${theme.colors.background};
       }
       tbody tr:hover {
         font-weight: bold;
-        color: #009879;
+        color: ${theme.colors.background};
     }
     
       

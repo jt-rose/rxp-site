@@ -31,6 +31,17 @@ const Layout = ({ children, title = "RXP" }: Props) => (
         flex: 1 0 auto;
       }
     `}</style>
+    <style jsx global>{`
+        body {
+          margin: 0;
+          padding: 0;
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 1.8;
+          color: #333;
+          font-family: sans-serif;
+        }
+      `}</style>
   </div>
 );
 

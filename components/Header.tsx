@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
+import theme from "../styles/theme";
+
 /*
 const RXPHeader = styled.header`
   width: 100%;
@@ -69,6 +71,7 @@ export const Header = () => (
           width: 100%;
           display: flex;
           border-bottom: 2px solid gray;
+          background-color: ${theme.colors.background};
         }
         .nav-spacing {
           flex-grow: 1;
@@ -76,6 +79,7 @@ export const Header = () => (
         a {
           margin: 2rem;
           text-decoration: none;
+          color: #ffffff;
         }
       `}
     </style>

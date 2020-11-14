@@ -76,11 +76,24 @@ export const Header = () => (
         .nav-spacing {
           flex-grow: 1;
         }
+        nav {
+          display: flex;
+        }
         a {
           margin: 2rem;
           text-decoration: none;
           color: #ffffff;
         }
+        @media (min-width: 700px) {
+          header, nav {
+            display: flex;
+            flex-direction: column;
+          }
+          .nav-spacing {
+            flex-grow: 0;
+          }
+        }
+
       `}
     </style>
   </header>

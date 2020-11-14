@@ -23,85 +23,85 @@ export const regexData: RegexDataObj[] = [
     },
     {
         symbol: "{3,}",
-        name: "occursAtLeast",
+        name: "occurs (minimum or more)",
         description: "requires base text to repeat at least the specified amount of times",
         example: "(?:sample){5, }"
     },
     {
         symbol: "{3, 6}",
-        name: "occursBetween",
+        name: "occurs between",
         description: "requires base text to repeat between the minimum and max range specified",
         example: "(?:sample){5, 8}"
     },
     {
         symbol: "+",
-        name: "occursOnceOrMore.and.isGreedy",
+        name: "one or more (greedy)",
         description: "Marks base text as occuring once or more, using a greedy search.",
         example: "(?:sample)+"
     },
     {
         symbol: "+?",
-        name: "occursOnceOrMore",
+        name: "one or more (lazy)",
         description: "Marks base text as occuring once or more, using a lazy search.",
         example: "(?:sample)+?"
     },
     {
         symbol: "*",
-        name: "occursZeroOrMore.and.isGreedy",
+        name: "zero or more (greedy)",
         description: "Marks base text as occuring zero or more times, using a greedy search.",
         example: "(?:sample)*"
     },
     {
         symbol: "*?",
-        name: "occursZeroOrMore",
+        name: "zero or more (lazy)",
         description: "Marks base text as occuring zero or more times, using a lazy search.",
         example: "(?:sample)*?"
     },
     {
         symbol: "(?=...)",
-        name: "followedBy",
+        name: "followed by",
         description: "requires base text to be followed by specified text",
         example: "sample(?=lorem)"
     },
     {
         symbol: "(?!...)",
-        name: "notFollowedBy",
+        name: "not followed by",
         description: "requires base text to NOT be followed by specified text",
         example: "sample(?!lorem)"
     },
     {
         symbol: "(?<=...)",
-        name: "precededBy",
+        name: "preceded by",
         description: "requires base text to be preceded by specified text",
         example: "(?<=lorem)sample"
     },
     {
         symbol: "(?<!...)",
-        name: "notPrecededBy",
+        name: "not preceded by",
         description: "requires base text to NOT be preceded by specified text",
         example: "(?<!lorem)sample"
     },
     {
         symbol: "^",
-        name: "atStart",
+        name: "at start",
         description: "marks text as occuring at beginning",
         example: "^(?:sample)"
     },
     {
         symbol: "$",
-        name: "atEnd",
+        name: "at end",
         description: "marks text as occuring at end",
         example: "(?:sample)$"
     },
     {
         symbol: "?",
-        name: "isOptional",
+        name: "optional",
         description: "marks text as optional",
         example: "(?:sample)?"
     },
     {
         symbol: "(...)",
-        name: "isCaptured",
+        name: "captured",
         description: "encapsulates text as a group and captures when matching",
         example: "(sample)"
     },
@@ -113,7 +113,7 @@ export const regexData: RegexDataObj[] = [
     },
     {
         symbol: "(?<...>...) ... \\k<...>",
-        name: "isVariable",
+        name: "variable",
         description: "uses a named capture group to match each \\k<...> to the first instance",
         example: "(?<var>)\\d{2}) and \\k<var>"
     },
@@ -122,7 +122,7 @@ export const regexData: RegexDataObj[] = [
 export const specialCharData: SpecialCharData[] = [
     {
         symbol: ".",
-        name: "anyCharacter",
+        name: "any character",
         description: "matches any single character"
     },
     {
@@ -132,7 +132,7 @@ export const specialCharData: SpecialCharData[] = [
     },
     {
         symbol: "\\d",
-        name: "anyDigit",
+        name: "any digit",
         description: "matches any single digit"
     },
     {

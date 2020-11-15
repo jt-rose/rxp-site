@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
 
 const APIPage = () => (
-  <Layout title="RXP API">
-    <h1>API</h1>
+  <Layout title="RXP API" pageTitle="API">
     <APIGuide />
   </Layout>
 );

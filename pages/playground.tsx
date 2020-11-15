@@ -7,8 +7,7 @@ const PlaygroundPage = () => {
     setWidth(window.innerWidth);
   });
   return (
-    <Layout title="About | Next.js + TypeScript Example">
-      <h1>RXP Playground</h1>
+    <Layout title="RXP Playground" pageTitle="RXP Playground">
       <h3>
         Hello! I'm the playground page. I'll have a lot more to show off later ;)
       </h3>

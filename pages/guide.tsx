@@ -18,14 +18,11 @@ const GuideSection = ({children}: Props) => (
         padding: 1em 1em 1em 0;
         max-width: 600px;
       }
-      div > :global(.section-title) {
+      .guide-section > :global(.section-title) {
+        text-align: center;
         margin: 0;
       }
-      div > :global(.section-paragraph) {
-      
-      }
     `}
-
     </style>
   </div>
 );
@@ -161,13 +158,12 @@ const ShorthandsGuide = () => (
 
 const GuidePage = () => {
 return (
-  <Layout title="RXP Guide">
-    <h1>Quick Guide</h1>
+  <Layout title="RXP Guide" pageTitle="Quick Guide">
     <InitGuide />
     <ModifyTextGuide />
     <ConstructGuide />
     <PresetsGuide />
-    <ShorthandsGuide /> 
+    <ShorthandsGuide /> //pageHeader for h1 with layout styling
   </Layout>
 );
 }

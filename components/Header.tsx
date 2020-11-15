@@ -70,7 +70,6 @@ export const Header = () => (
         header {
           width: 100%;
           display: flex;
-          border-bottom: 2px solid gray;
           background-color: ${theme.colors.background};
         }
         .nav-spacing {

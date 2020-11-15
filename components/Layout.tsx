@@ -6,9 +6,10 @@ import { Header } from "./Header";
 type Props = {
   children?: ReactNode;
   title?: string;
+  pageTitle?: string;
 };
 
-const Layout = ({ children, title = "RXP" }: Props) => (
+const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
   <div className="site-body">
     
     <Head>
@@ -18,7 +19,11 @@ const Layout = ({ children, title = "RXP" }: Props) => (
     </Head>
     <main>
     <Header />
-    <div className="main-container">{children}</div>
+
+    <div className="main-container">
+    <h1>{pageTitle}</h1>
+    {children}
+    </div>
     </main>
     
     <footer>
@@ -43,6 +48,10 @@ const Layout = ({ children, title = "RXP" }: Props) => (
       }
       .main-container {
         flex: 1 0 auto;
+        padding: .7em;
+      }
+      h1 {
+        text-align: center;
       }
     `}</style>
     <style jsx global>{`

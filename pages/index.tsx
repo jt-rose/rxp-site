@@ -1,8 +1,7 @@
 import Layout from "../components/Layout";
 
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>RXP</h1>
+  <Layout title="RXP" pageTitle="RXP">
     <p>a descriptive constructor for regular expressions</p>
     <p>
       RXP is a small library that provides a constructor for regular

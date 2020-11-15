@@ -4,8 +4,7 @@ import theme from "../styles/theme";
 import { regexData, specialCharData } from "../utils/regexData";
 
 const RegexGuidePage = () => (
-  <Layout title="regex-guide">
-    <h1>Regex Guide</h1>
+  <Layout title="regex-guide" pageTitle="Regex Guide">
     <p>A quick reference guide to common regex characters.</p>
     <h2>Regex Behavior Modifiers</h2>
     <table>

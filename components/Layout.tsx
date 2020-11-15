@@ -10,47 +10,55 @@ type Props = {
 };
 
 const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
-  <div className="site-body">
+  <div className="site-container">
     
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <main>
     <Header />
-
-    <div className="main-container">
-    <h1>{pageTitle}</h1>
-    {children}
-    </div>
-    </main>
+    <div className="site-content">
     
+    
+      
+      <main>
+      <h1>{pageTitle}</h1>
+    {children}
     <footer>
       <hr />
       <span>Developed by Jeff Rose, 2020</span>
     </footer>
+    </main>
+      
+    
+    </div>
+    
     <style jsx>{`
-      .site-body {
+      .site-container {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-      }
-      main {
-        display: flex;
-        flex-direction: column;
+        width: 100%;
       }
       @media (min-width: 700px) {
-        main {
-          display: flex;
+        .site-container {
           flex-direction: row;
         }
       }
-      .main-container {
-        flex: 1 0 auto;
+      .site-content {
+        display: flex;
+        flex-direction: column;
         padding: .7em;
+        flex-grow: 1;
+      }
+      main {
+        flex-grow: 1
       }
       h1 {
+        text-align: center;
+      }
+      footer {
         text-align: center;
       }
     `}</style>

@@ -147,7 +147,11 @@ const ShorthandsGuide = () => (
       to improve readability, and there is no functional difference 
       between optional(“text”) and init(“text”).isOptional.
       </p>
-      <CodeSample sample={`init(optional("("), "text", optional(")").construct() // /(?:\()?text(?:\))?/`} />
+      <CodeSample sample={`init(
+    optional("("), 
+    "text", 
+    optional(")")
+  .construct() // /(?:\()?text(?:\))?/`} />
       <p>
       A variety of shorthands are available and can be found on the <Link href="/api-guide#shorthands">API page</Link>. 
       All of these produce the standard RXP constructor object with the unique 
@@ -163,7 +167,7 @@ return (
     <ModifyTextGuide />
     <ConstructGuide />
     <PresetsGuide />
-    <ShorthandsGuide /> //pageHeader for h1 with layout styling
+    <ShorthandsGuide />
   </Layout>
 );
 }

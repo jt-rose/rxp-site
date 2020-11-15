@@ -68,7 +68,6 @@ export const Header = () => (
     <style jsx>
       {`
         header {
-          width: 100%;
           display: flex;
           background-color: ${theme.colors.background};
         }

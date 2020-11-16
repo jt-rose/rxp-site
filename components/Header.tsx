@@ -75,6 +75,7 @@ export const Header = () => (
           background-color: ${theme.colors.background};
           position: sticky;
           top: 0;
+          font-weight: bold;
         }
         .nav-spacing {
           flex-grow: 1;
@@ -102,6 +103,9 @@ export const Header = () => (
           }
           a {
             padding: .5em 2em;
+          }
+          nav a:first-of-type {
+            padding-top: 1em;
           }
         }
 

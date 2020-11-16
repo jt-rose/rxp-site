@@ -43,7 +43,7 @@ const siteLinks = [
   },
   {
     pageTitle: "Regex",
-    path: "/regex",
+    path: "/regex-guide",
     icon: "",
   },
   {

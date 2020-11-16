@@ -70,6 +70,8 @@ export const Header = () => (
         header {
           display: flex;
           background-color: ${theme.colors.background};
+          position: sticky;
+          top: 0;
         }
         .nav-spacing {
           flex-grow: 1;
@@ -89,6 +91,7 @@ export const Header = () => (
           header, nav {
             display: flex;
             flex-direction: column;
+            height: 100vh;
           }
           .nav-spacing {
             flex-grow: 0;

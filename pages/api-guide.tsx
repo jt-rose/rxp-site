@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import React, { useState } from "react";
 import { APIKeyData, APIData } from "../utils/APIData";
 import { CodeSample } from "../utils/CodeSample";
+import theme from "../styles/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortDown } from "@fortawesome/free-solid-svg-icons";
@@ -82,7 +83,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
       <style jsx>{`
         .accordion-panel button {
           font-size: 1.2em;
-          color: #444;
+          color: #fff;
           cursor: pointer;
           padding: 18px;
           width: 100%;
@@ -91,7 +92,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
           outline: none;
         }
         .accordion-panel button {
-          background-color: ${isHovered ? "#ccc" : "#eee"};
+          background-color: ${isHovered ? theme.colors.backgroundHover : theme.colors.background};
           border-radius: ${borderRadius}
         }
         .accordion-panel-content {
@@ -116,7 +117,7 @@ const AccordionSection = (props: { section: APISection}) => {
     <section key={`section-${section.title}`} id={section.title.toLowerCase().replace(" ", "-")} className="api-section">
       <div className="section-title-container">
       <div className="section-title" onClick={() => togglePanels(!showPanels)}>
-          <h3>{section.title}</h3>
+          <h2>{section.title}</h2>
           <div className="icon-holder" >
             <FontAwesomeIcon icon={faSortDown} size={"lg"} transform={showPanels ? {rotate: 180} : undefined}/>
           </div>

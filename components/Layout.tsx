@@ -25,11 +25,12 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       <main>
       <h1>{pageTitle}</h1>
     {children}
+    
+    </main>
     <footer>
       <hr />
       <span>Developed by Jeff Rose, 2020</span>
     </footer>
-    </main>
       
     
     </div>

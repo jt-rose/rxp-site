@@ -35,7 +35,7 @@ const siteLinks = [
   },
   {
     pageTitle: "API",
-    path: "/api",
+    path: "/api-guide",
     icon: "",
   },
   {

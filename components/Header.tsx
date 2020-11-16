@@ -61,7 +61,7 @@ export const Header = () => (
     <nav>
       {siteLinks.map((link) => (
         <Link href={link.path} key={`${link.pageTitle}-key`}>
-          <a>{link.pageTitle}</a>
+          <a><h3>{link.pageTitle}</h3></a>
         </Link>
       ))}
     </nav>
@@ -78,9 +78,12 @@ export const Header = () => (
           display: flex;
         }
         a {
-          margin: 2rem;
+          padding: 0 2rem;
           text-decoration: none;
           color: #ffffff;
+        }
+        nav a:hover {
+          background-color: ${theme.colors.backgroundHover};
         }
         @media (min-width: 700px) {
           header, nav {

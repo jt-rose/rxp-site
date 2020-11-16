@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 
 const IndexPage = () => (
   <Layout title="RXP" pageTitle="RXP">
-    <p>a descriptive constructor for regular expressions</p>
+    <p>A descriptive constructor for regular expressions</p>
     <p>
       RXP is a small library that provides a constructor for regular
       expressions, providing the following benefits:
@@ -10,23 +10,23 @@ const IndexPage = () => (
     {[
       {
         title: "Plain English Descriptions",
-        content: "lorem ipsum",
+        content: "Replace cryptic regex with intuitive descriptions",
       },
       {
         title: "Modular and Composable Regex Components",
-        content: "lorem ipsum",
+        content: "Build regex as small, manageable pieces and combine or extend them as needed",
       },
       {
         title: "Automatic Escaping of Characters",
-        content: "good defaults - expand",
+        content: "Write regex with a WYSIWYG mindset and let RXP handle escaping of special characters for you",
       },
       {
         title: "Accepts Strings, Regex, or Other RXP Units",
-        content: "lorem ipsum",
+        content: "Highly flexible constructor that can format strings or accept other regex or RXP constructors - RXP will reconcile everything behind the scenes",
       },
       {
         title: "Automatically Formats Regex Variables",
-        content: "lorem ipsum",
+        content: "Define a regex variable once, store it as an old-fashioned JavaScript variable, and insert it wherever you want - RXP will reconfigure it to work correctly, regardless of positioning",
       },
     ].map((x) => (
       <li key={`${x.title}-key`}>
@@ -34,13 +34,14 @@ const IndexPage = () => (
         <p>{x.content}</p>
       </li>
     ))}
-    <style jsx global>
-      {`
-        body {
-          margin: 0;
-        }
-      `}
-    </style>
+    <style jsx>{`
+      li {
+        list-style-type: none;
+      }
+      li p {
+        padding: 0 1em 1em 1em;
+      }
+    `}</style>
   </Layout>
 );
 

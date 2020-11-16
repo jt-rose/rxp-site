@@ -50,7 +50,7 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       .site-content {
         display: flex;
         flex-direction: column;
-        padding: .7em;
+        padding: 1em;
         flex-grow: 1;
       }
       main {

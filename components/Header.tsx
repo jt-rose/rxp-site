@@ -1,6 +1,9 @@
 import React from "react";
 import Link from "next/link";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+
 import theme from "../styles/theme";
 
 /*
@@ -52,22 +55,22 @@ const siteLinks = [
 
 export const Header = () => (
   <header>
-    <div className="home-icon">
-      <Link href="/">
-        <a>RXP</a>
-      </Link>
-    </div>
-    <div className="nav-spacing" />
     <nav>
+    <Link href="/">
+        <a>
+        <FontAwesomeIcon icon={faHome} size="2x" color="#fff"/>
+        </a>
+      </Link>
+      <div className="nav-spacing" />
       {siteLinks.map((link) => (
         <Link href={link.path} key={`${link.pageTitle}-key`}>
-          <a><h3>{link.pageTitle}</h3></a>
+          <a>{link.pageTitle}</a>
         </Link>
       ))}
     </nav>
     <style jsx>
       {`
-        header {
+        nav {
           display: flex;
           background-color: ${theme.colors.background};
           position: sticky;
@@ -80,21 +83,25 @@ export const Header = () => (
           display: flex;
         }
         a {
-          padding: 0 2rem;
+          padding: .7em 2em .5em;
           text-decoration: none;
           color: #ffffff;
         }
         nav a:hover {
           background-color: ${theme.colors.backgroundHover};
         }
+
         @media (min-width: 700px) {
-          header, nav {
+          nav {
             display: flex;
             flex-direction: column;
             height: 100vh;
           }
           .nav-spacing {
             flex-grow: 0;
+          }
+          a {
+            padding: .5em 2em;
           }
         }
 

@@ -54,7 +54,6 @@ const siteLinks = [
 ];
 
 export const Header = () => (
-  <header>
     <nav>
     <Link href="/">
         <a>
@@ -66,7 +65,7 @@ export const Header = () => (
           <a>{link.pageTitle}</a>
         </Link>
       ))}
-    </nav>
+    
     <style jsx>
       {`
         nav {
@@ -75,15 +74,13 @@ export const Header = () => (
           position: sticky;
           top: 0;
           font-weight: bold;
-          justify-content: space-evenly;
-        }
-        nav {
-          display: flex;
         }
         a {
           padding: .7em 0 .5em;
           text-decoration: none;
           color: #ffffff;
+          flex-grow: 1;
+          text-align: center;
         }
         nav a:hover {
           background-color: ${theme.colors.backgroundHover};
@@ -93,10 +90,11 @@ export const Header = () => (
             display: flex;
             flex-direction: column;
             height: 100vh;
-            justify-content: start;
           }
           a {
             padding: .5em 2em;
+            flex-grow: 0;
+            text-align: left;
           }
           nav a:first-of-type {
             padding-top: 1em;
@@ -105,7 +103,7 @@ export const Header = () => (
 
       `}
     </style>
-  </header>
+    </nav>
 );
 // notes
 // mobile: Home...............Hamburger

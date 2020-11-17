@@ -61,7 +61,6 @@ export const Header = () => (
         <FontAwesomeIcon icon={faHome} size="2x" color="#fff"/>
         </a>
       </Link>
-      <div className="nav-spacing" />
       {siteLinks.map((link) => (
         <Link href={link.path} key={`${link.pageTitle}-key`}>
           <a>{link.pageTitle}</a>
@@ -76,15 +75,13 @@ export const Header = () => (
           position: sticky;
           top: 0;
           font-weight: bold;
-        }
-        .nav-spacing {
-          flex-grow: 1;
+          justify-content: space-evenly;
         }
         nav {
           display: flex;
         }
         a {
-          padding: .7em 2em .5em;
+          padding: .7em 0 .5em;
           text-decoration: none;
           color: #ffffff;
         }
@@ -96,9 +93,7 @@ export const Header = () => (
             display: flex;
             flex-direction: column;
             height: 100vh;
-          }
-          .nav-spacing {
-            flex-grow: 0;
+            justify-content: start;
           }
           a {
             padding: .5em 2em;

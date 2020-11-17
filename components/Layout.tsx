@@ -1,7 +1,31 @@
-import React, { ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 import Head from "next/head";
 import theme from "../styles/theme";
 import { Header } from "./Header";
+
+import { SiReact, SiNextDotJs, SiTypescript } from "react-icons/si"
+type IconTypes = typeof SiReact | typeof SiNextDotJs | typeof SiTypescript;
+
+const createIconWithHover = (Icon: IconTypes, linkPath: string) => () => {
+  const [isHovered, setHover] = useState(false);
+  return (
+    <a href={linkPath}>
+    <Icon 
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      color={isHovered ? theme.colors.background : "black"}
+    />
+    <style jsx>{`
+    a {
+      padding-left: .2em;
+    }
+    `}</style>
+    </a>
+  )
+};
+const ReactIcon = createIconWithHover(SiReact, "https://reactjs.org/");
+const NextJSIcon = createIconWithHover(SiNextDotJs, "https://nextjs.org/");
+const TypeScriptIcon = createIconWithHover(SiTypescript, "https://www.typescriptlang.org/");
 
 const formattedThemeBKG = theme.colors.background.replace("#", "");
 const badgeSize = "1.1";
@@ -38,9 +62,15 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
     {children}
     </main>
 
+
     <footer>
-      <hr />
+      <div className="footer-spacing" />
       <span>Developed by Jeff Rose, 2020</span>
+      <div className="techstack-icons">
+        <ReactIcon />
+        <NextJSIcon />
+        <TypeScriptIcon />
+      </div>
     </footer>
     
     </div>
@@ -66,7 +96,7 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       .site-content {
         display: flex;
         flex-direction: column;
-        padding: 1em;
+        padding: 1em 1em .5em;
         flex-grow: 1;
       }
       main {
@@ -78,7 +108,12 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
         text-align: center;
       }
       footer {
-        text-align: center;
+        border-top: solid gray 2px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .techstack-icons {
+        padding-right: 1em;
       }
     `}</style>
     <style jsx global>{`

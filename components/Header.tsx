@@ -91,8 +91,7 @@ export const Header = () => (
         nav a:hover {
           background-color: ${theme.colors.backgroundHover};
         }
-
-        @media (min-width: 700px) {
+        @media (min-width: ${theme.breakPoints.desktopWidth}) {
           nav {
             display: flex;
             flex-direction: column;

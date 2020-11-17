@@ -1,21 +1,7 @@
 import Layout from "../components/Layout";
-import theme from "../styles/theme";
-
-const formattedThemeBKG = theme.colors.background.replace("#", "");
 
 const IndexPage = () => (
   <Layout title="RXP" pageTitle="RXP">
-    <div className="site-badges">
-    <a href="https://www.github.com/jt-rose/rxp">
-    <img src={`https://badgen.net/github/release/jt-rose/rxp?icon=github&label&scale=1.3&color=${formattedThemeBKG}`} alt="Github"/>
-    </a>
-    <a href="https://www.npmjs.com/package/rxp">
-    <img src={`https://badgen.net/badge/icon/v1.4.5?icon=npm&label&scale=1.3&color=${formattedThemeBKG}`} alt="NPM"/>
-    </a>
-    <a href="https://www.typescriptlang.org/">
-    <img src={`https://badgen.net/badge/icon/typescript?icon=typescript&label&scale=1.3&color=${formattedThemeBKG}`} alt="TypeScript" />
-    </a>
-    </div>
     
     <p>A descriptive constructor for regular expressions</p>
 

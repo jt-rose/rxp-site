@@ -1,8 +1,11 @@
 import React, { ReactNode } from "react";
-//import Link from "next/link";
 import Head from "next/head";
-
+import theme from "../styles/theme";
 import { Header } from "./Header";
+
+const formattedThemeBKG = theme.colors.background.replace("#", "");
+const badgeSize = "1.1";
+
 type Props = {
   children?: ReactNode;
   title?: string;
@@ -19,19 +22,26 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
     </Head>
     <Header />
     <div className="site-content">
-    
-    
-      
+    <div className="site-badges">
+    <a href="https://www.github.com/jt-rose/rxp">
+    <img src={`https://badgen.net/github/release/jt-rose/rxp?icon=github&label&scale=${badgeSize}&color=${formattedThemeBKG}`} alt="Github"/>
+    </a>
+    <a href="https://www.npmjs.com/package/rxp">
+    <img src={`https://badgen.net/badge/icon/v1.4.5?icon=npm&label&scale=${badgeSize}&color=${formattedThemeBKG}`} alt="NPM"/>
+    </a>
+    <a href="https://www.typescriptlang.org/">
+    <img src={`https://badgen.net/badge/icon/typescript?icon=typescript&label&scale=${badgeSize}&color=${formattedThemeBKG}`} alt="TypeScript" />
+    </a>
+    </div>
       <main>
-      <h1>{pageTitle}</h1>
+        <h1>{pageTitle}</h1>
     {children}
-    
     </main>
+
     <footer>
       <hr />
       <span>Developed by Jeff Rose, 2020</span>
     </footer>
-      
     
     </div>
     
@@ -42,10 +52,16 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
         min-height: 100vh;
         width: 100%;
       }
-      @media (min-width: 700px) {
+      @media (min-width: ${theme.breakPoints.desktopWidth}) {
         .site-container {
           flex-direction: row;
         }
+      }
+      .site-badges {
+        text-align: right;
+      }
+      .site-badges a {
+        padding-left: .2em;
       }
       .site-content {
         display: flex;
@@ -54,7 +70,9 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
         flex-grow: 1;
       }
       main {
-        flex-grow: 1
+        flex-grow: 1;
+        max-width: 700px;
+        margin: auto;
       }
       h1 {
         text-align: center;
@@ -64,7 +82,7 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       }
     `}</style>
     <style jsx global>{`
-        body {
+        html, body {
           margin: 0;
           padding: 0;
           font-size: 18px;

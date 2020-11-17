@@ -12,6 +12,9 @@ const theme = {
       border: '#ddd',
       warning: '#fff3cd',
       success: '#d4edda'
+    },
+    breakPoints: {
+      desktopWidth: "865px"
     }
   }
   

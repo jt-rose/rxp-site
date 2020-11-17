@@ -16,7 +16,6 @@ const GuideSection = ({children}: Props) => (
         display: flex;
         flex-direction: column;
         padding: 1em 1em 1em 0;
-        max-width: 600px;
       }
       .guide-section > :global(.section-title) {
         text-align: center;
@@ -58,7 +57,11 @@ init("test ", /out /, sample).construct() // /test out sample/`} />
       </p>
       <CodeSample sample={`const name = init("Jeff");
 const namePattern = init(name.atStart, "some stuff", name.isOptional);
-const patternsAndPatternsOhMy = init(namePattern, namePattern, namePattern.occurs(999))`} />
+const patternsAndPatternsOhMy = init(
+    namePattern, 
+    namePattern, 
+    namePattern.occurs(999)
+  ).construct();`} />
       </GuideSection>
 );
 

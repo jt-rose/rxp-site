@@ -77,12 +77,6 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
     </div>
     
     <style jsx>{`
-    .test {
-      color: blue;
-    }
-    .test:hover {
-      color: yellow;
-    }
       .site-container {
         display: flex;
         flex-direction: column;
@@ -108,6 +102,7 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       }
       main {
         flex-grow: 1;
+        width: 100%;
         max-width: 700px;
         margin: auto;
       }

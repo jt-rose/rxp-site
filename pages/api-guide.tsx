@@ -96,7 +96,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
           border-radius: ${borderRadius}
         }
         .accordion-panel-content {
-          padding: 0 18px;
+          padding: 0 18px 8px;
           background-color: white;
         }
         .accordion-panel-content {

@@ -5,7 +5,7 @@ export const CodeSample = ({sample}: {sample: string}) => (
   <SyntaxHighlighter 
     language="javascript" 
     style={vscDarkPlus} 
-    customStyle={{borderRadius: ".3em", margin: "0 2em .5em 1.5em"}}
+    customStyle={{borderRadius: ".3em", overflow: "auto", width: "90%", margin: "auto"}}
   >
     {sample}
   </SyntaxHighlighter>

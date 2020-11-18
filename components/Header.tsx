@@ -74,6 +74,7 @@ export const Header = () => (
           position: sticky;
           top: 0;
           font-weight: bold;
+          border-bottom: 1px solid ${theme.colors.backgroundHover};
         }
         a {
           padding: .7em 0 .5em;
@@ -90,6 +91,7 @@ export const Header = () => (
             display: flex;
             flex-direction: column;
             height: 100vh;
+            border-bottom: 0 none #ccc;
           }
           a {
             padding: .5em 2em;

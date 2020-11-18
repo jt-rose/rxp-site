@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 
-import { CodeSample } from "../utils/CodeSample";
+import { CodeSample } from "../components/CodeSample";
 
 type Props = {
   children?: ReactNode;

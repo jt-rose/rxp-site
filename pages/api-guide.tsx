@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 
 import React, { useState } from "react";
 import { APIKeyData, APIData } from "../utils/APIData";
-import { CodeSample } from "../utils/CodeSample";
+import { CodeSample } from "../components/CodeSample";
 import theme from "../styles/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

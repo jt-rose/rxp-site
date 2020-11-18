@@ -1,4 +1,23 @@
 import Layout from "../components/Layout";
+import { RXPexamples } from "../utils/examples";
+import { CodeSample } from "../components/CodeSample";
+
+const Examples = () => (
+  <ul>
+      {RXPexamples.map(example => (
+          <li key={`example-${example.title}`}>
+              <h3>{example.title}</h3>
+              <p>Target: {example.target}</p>
+              <CodeSample sample={example.sample}/>
+          </li>
+      ))}
+      <style jsx>{`
+          ul {
+              list-style-type: none;
+          }
+      `}</style>
+  </ul>
+);
 
 const IndexPage = () => (
   <Layout title="RXP" pageTitle="RXP">
@@ -36,6 +55,7 @@ const IndexPage = () => (
         <p>{x.content}</p>
       </li>
     ))}
+    <Examples />
     <style jsx>{`
       li {
         list-style-type: none;

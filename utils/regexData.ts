@@ -109,7 +109,7 @@ export const regexData: RegexDataObj[] = [
         symbol: "(?:...)",
         name: "non-capture grouping",
         description: "encapsulates text as a group without capturing",
-        example: "(sample)"
+        example: "(?:sample)"
     },
     {
         symbol: "(?<...>...) ... \\k<...>",

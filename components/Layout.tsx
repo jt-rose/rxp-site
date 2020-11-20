@@ -6,7 +6,7 @@ import { Header } from "./Header";
 import { SiReact, SiNextDotJs, SiTypescript } from "react-icons/si"
 type IconTypes = typeof SiReact | typeof SiNextDotJs | typeof SiTypescript;
 
-const createIconWithHover = (Icon: IconTypes, linkPath: string) => () => {
+const IconWithHover = ({Icon, linkPath}: {Icon: IconTypes, linkPath: string}) => {
   const [isHovered, setHover] = useState(false);
   return (
     <a href={linkPath}>
@@ -23,9 +23,6 @@ const createIconWithHover = (Icon: IconTypes, linkPath: string) => () => {
     </a>
   )
 };
-const ReactIcon = createIconWithHover(SiReact, "https://reactjs.org/");
-const NextJSIcon = createIconWithHover(SiNextDotJs, "https://nextjs.org/");
-const TypeScriptIcon = createIconWithHover(SiTypescript, "https://www.typescriptlang.org/");
 
 const formattedThemeBKG = theme.colors.background.replace("#", "");
 const badgeSize = "1.1";
@@ -67,9 +64,9 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       <div className="footer-spacing" />
       <span>Developed by Jeff Rose, 2020</span>
       <div className="techstack-icons">
-        <ReactIcon />
-        <NextJSIcon />
-        <TypeScriptIcon />
+        <IconWithHover Icon={SiReact} linkPath="https://reactjs.org/" />
+        <IconWithHover Icon={SiNextDotJs} linkPath="https://nextjs.org/" />
+        <IconWithHover Icon={SiTypescript} linkPath="https://www.typescriptlang.org/" />
       </div>
     </footer>
     

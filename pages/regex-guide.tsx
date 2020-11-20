@@ -79,6 +79,9 @@ const RegexGuidePage = () => (
         font-weight: bold;
         color: ${theme.colors.background};
     }
+    p, h2 {
+      text-align: center;
+    }
     
       
       `}</style>

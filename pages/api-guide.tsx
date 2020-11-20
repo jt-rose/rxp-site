@@ -5,16 +5,10 @@ import { APIKeyData, APIData } from "../utils/APIData";
 import { CodeSample } from "../components/CodeSample";
 import theme from "../styles/theme";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortDown } from "@fortawesome/free-solid-svg-icons";
+import { FaSortDown } from "react-icons/fa";
 
-const APIPage = () => (
-  <Layout title="RXP API" pageTitle="API">
-    <APIGuide />
-  </Layout>
-);
-
-export default APIPage;
+const backgroundColor = theme.colors.background;
+const backgroundHover = theme.colors.backgroundHover;
 
 const {
   step1Data,
@@ -58,8 +52,8 @@ const APIGuideSections: APISection[] = [
   },
 ];
 
-const topBorderRadius = "1em 1em 0 0";
-const bottomBorderRadius = "0 0 1em 1em";
+const topBorderRadius = ".5em .5em 0 0";
+const bottomBorderRadius = "0 0 .5em .5em";
 
 const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, lastChild: boolean }) => {
   const [isOpen, toggleOpen] = useState(false);
@@ -85,23 +79,25 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
           font-size: 1.2em;
           color: #fff;
           cursor: pointer;
-          padding: 18px;
+          padding: 10px;
+          padding-top: 14px;
           width: 100%;
           text-align: center;
           border: none;
+          border-bottom: ${!(lastChild) && !(isOpen) ? `1px solid ${backgroundHover}` : "none"};
           outline: none;
         }
         .accordion-panel button {
-          background-color: ${isHovered ? theme.colors.backgroundHover : theme.colors.background};
+          background-color: ${isHovered ? backgroundHover : backgroundColor};
           border-radius: ${borderRadius}
         }
         .accordion-panel-content {
           padding: 0 18px 8px;
-          background-color: white;
+          background-color: #fff;
         }
         .accordion-panel-content {
           display: ${isOpen ? "block" : "none"};
-          border: 2px solid ${isHovered ? "#ccc" : "#eee"};
+          border: 2px solid ${isHovered ? backgroundHover : backgroundColor};
           border-radius: ${lastChild && isOpen ? bottomBorderRadius : "0"}
         }
       `}</style>
@@ -119,7 +115,7 @@ const AccordionSection = (props: { section: APISection}) => {
       <div className="section-title" onClick={() => togglePanels(!showPanels)}>
           <h2>{section.title}</h2>
           <div className="icon-holder" >
-            <FontAwesomeIcon icon={faSortDown} size={"lg"} transform={showPanels ? {rotate: 180} : undefined}/>
+            <FaSortDown style={{transform: `${showPanels ? "rotate(180deg)" : "none"}`}}/>
           </div>
       </div>
       </div>
@@ -153,13 +149,8 @@ const AccordionSection = (props: { section: APISection}) => {
             justify-content: space-between;
             width: 50%;
           }
-          .section-title:hover {
-            background-color: #eee;
-          }
-          .icon-holder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+          h2 {
+            margin: 0;
           }
         `}</style>
       </section>
@@ -173,3 +164,11 @@ const APIGuide = () => (
     ))}
   </div>
 );
+
+const APIPage = () => (
+  <Layout title="RXP API" pageTitle="API">
+    <APIGuide />
+  </Layout>
+);
+
+export default APIPage;

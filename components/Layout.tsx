@@ -3,7 +3,6 @@ import Head from "next/head";
 import theme from "../styles/theme";
 import { Header } from "./Header";
 
-/* temporarily remove icons while resolving hook calls error - duplicate react versions?
 import { SiReact, SiNextDotJs, SiTypescript } from "react-icons/si"
 type IconTypes = typeof SiReact | typeof SiNextDotJs | typeof SiTypescript;
 
@@ -27,7 +26,7 @@ const createIconWithHover = (Icon: IconTypes, linkPath: string) => () => {
 const ReactIcon = createIconWithHover(SiReact, "https://reactjs.org/");
 const NextJSIcon = createIconWithHover(SiNextDotJs, "https://nextjs.org/");
 const TypeScriptIcon = createIconWithHover(SiTypescript, "https://www.typescriptlang.org/");
-*/
+
 const formattedThemeBKG = theme.colors.background.replace("#", "");
 const badgeSize = "1.1";
 
@@ -68,9 +67,9 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       <div className="footer-spacing" />
       <span>Developed by Jeff Rose, 2020</span>
       <div className="techstack-icons">
-        {/*<ReactIcon />
+        <ReactIcon />
         <NextJSIcon />
-        <TypeScriptIcon />*/}
+        <TypeScriptIcon />
       </div>
     </footer>
     

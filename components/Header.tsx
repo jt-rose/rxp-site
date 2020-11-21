@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FaHome} from "react-icons/fa";
 
 import theme from "../styles/theme";
 
@@ -57,7 +56,7 @@ export const Header = () => (
     <nav>
     <Link href="/">
         <a>
-        <FontAwesomeIcon icon={faHome} size="2x" color="#fff"/>
+        <FaHome size="2em" color="#fff"/>
         </a>
       </Link>
       {siteLinks.map((link) => (
@@ -77,7 +76,7 @@ export const Header = () => (
           border-bottom: 1px solid ${theme.colors.backgroundHover};
         }
         a {
-          padding: .7em 0 .5em;
+          padding: .7em 0 0;
           text-decoration: none;
           color: #ffffff;
           flex-grow: 1;

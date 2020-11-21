@@ -113,10 +113,9 @@ const AccordionSection = (props: { section: APISection}) => {
     <section key={`section-${section.title}`} id={section.title.toLowerCase().replace(" ", "-")} className="api-section">
       <div className="section-title-container">
       <div className="section-title" onClick={() => togglePanels(!showPanels)}>
+        <FaSortDown style={{color: "#fff"}} />
           <h2>{section.title}</h2>
-          <div className="icon-holder" >
-            <FaSortDown style={{transform: `${showPanels ? "rotate(180deg)" : "none"}`}}/>
-          </div>
+          <FaSortDown style={{transform: `${showPanels ? "none" : "rotate(180deg)"}`, paddingBottom: `${showPanels ? "5px" : "none"}`}}/>
       </div>
       </div>
         
@@ -147,7 +146,8 @@ const AccordionSection = (props: { section: APISection}) => {
           .section-title {
             display: flex;
             justify-content: space-between;
-            width: 50%;
+            align-items: center;
+            width: 90%;
           }
           h2 {
             margin: 0;

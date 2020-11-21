@@ -58,7 +58,7 @@ init("sample").atStart.construct() // 	/^(?:sample)/`} />
       <p>
       The <code className="code-in-text">init</code> function combines any number of arguments into a text to search for:
       </p>
-      <CodeSample sample={`init("search", "for", "me").construct() // /search for me/`} />
+      <CodeSample sample={`init("search", " for ", "me").construct() // /search for me/`} />
     
       <p>
       String arguments will automatically be escaped, so you can enter the 
@@ -92,7 +92,7 @@ const ModifyTextGuide = () => (
       After creating the RXP constructor object, 
       the provided text can be modified with regex behavior:
       </p>
-      <CodeSample sample={`sample.occurs(2).construct() // /samplesample/ 
+      <CodeSample sample={`sample.occurs(2).construct() // /(?:sample){2}/ 
 sample.or("other").construct() // /(?:sample)|(?:other)/ 
 sample.precededBy("ID: ").construct() // /(?<=ID: )sample/
 sample.atStart.construct() // /^(?:sample)/ 

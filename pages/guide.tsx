@@ -43,6 +43,7 @@ yarn add rxp`} />
 const { init, optional, either } = RXP;`} />
 <p>If you want to install specific functions directly, you can specify them in the import:</p>
 <CodeSample sample={`import { init, optional, either } from "rxp"`} />
+<p>Alternatively, you can bypass importing the library altogether and just use the live code editor on the <Link href="/playground"><a>playground</a></Link> page to construct a regex and then copy it directly into your application</p>
   </GuideSection>
 )
 

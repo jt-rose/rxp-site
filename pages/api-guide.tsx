@@ -1,4 +1,5 @@
 import Layout from "../components/Layout";
+import { useRouter } from "next/router";
 
 import React, { useState } from "react";
 import { APIKeyData, APIData } from "../utils/APIData";
@@ -166,9 +167,9 @@ const APIGuide = () => (
 );
 
 const APIPage = () => (
-  <Layout title="RXP API" pageTitle="API">
-    <APIGuide />
-  </Layout>
+    <Layout title="RXP API" pageTitle="API">
+      <APIGuide />
+    </Layout>
 );
 
 export default APIPage;

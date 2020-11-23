@@ -57,13 +57,15 @@ const topBorderRadius = ".5em .5em 0 0";
 const bottomBorderRadius = "0 0 .5em .5em";
 
 const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, lastChild: boolean }) => {
-  const [isOpen, toggleOpen] = useState(false);
-  const [isHovered, toggleHover] = useState(false);
+  const routeQuery = useRouter().asPath.replace("/api-guide#", "");
   const { APIKeyInfo, firstChild, lastChild } = props;
+  const defaultOpen = routeQuery === APIKeyInfo.key;
+  const [isOpen, toggleOpen] = useState(defaultOpen);
+  const [isHovered, toggleHover] = useState(false);
   const borderRadius = firstChild ? topBorderRadius : lastChild && !(isOpen) ? bottomBorderRadius : "0";
 
   return (
-    <li key={`list-item-${APIKeyInfo.key}`}>
+    <li key={`list-item-${APIKeyInfo.key}`} id={APIKeyInfo.key}>
       <div className="accordion-panel"
       onMouseEnter={() => toggleHover(true)}
       onMouseLeave={() => toggleHover(false)}
@@ -106,7 +108,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
   );
 };
 
-const AccordionSection = (props: { section: APISection}) => {
+const AccordionSection = (props: { section: APISection }) => {
   const [showPanels, togglePanels] = useState(true); 
   const {section} = props; 
 
@@ -161,15 +163,19 @@ const AccordionSection = (props: { section: APISection}) => {
 const APIGuide = () => (
   <div>
     {APIGuideSections.map((section) => (
-      <AccordionSection section={section} />
+      <AccordionSection section={section} key={`${section.title}-key`}/>
     ))}
   </div>
 );
 
-const APIPage = () => (
+const APIPage = () => {
+  
+
+  return (
     <Layout title="RXP API" pageTitle="API">
       <APIGuide />
     </Layout>
-);
+  );
+}
 
 export default APIPage;

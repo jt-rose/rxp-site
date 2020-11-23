@@ -18,7 +18,7 @@ const RegexGuidePage = () => (
       </thead>
       <tbody>
       {regexData.map(data => (
-        <tr>
+        <tr id={data.name.replace(" ", "-")}>
           <td>{data.symbol}</td>
           <td>{data.name}</td>
           <td>{data.description}</td>

@@ -278,7 +278,7 @@ wrapBrackets("sample") // /\\[sample\\]/`
     key: "withBoundaries",
     description:
       "Marks the arguments provided as being surrounded by \\b boundary markers.",
-    codeSample: `withBoundaries("sample") // /\bsample\b/`
+    codeSample: `withBoundaries("sample") // /\\bsample\\b/`
   },
 ];
 

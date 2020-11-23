@@ -4,6 +4,23 @@ import React, { ReactNode } from "react";
 
 import { CodeSample } from "../components/CodeSample";
 
+const APICodeLink = (props: { APIKey: string, overWrite?: string }) => (
+<Link href={`/api-guide#${props.APIKey}`}>
+  <a className="code-in-text">
+  <style jsx>{`
+  .code-in-text {
+    color: #353535;
+    background-color: #f5f2f0;
+    border-radius: 3px;
+    padding: .2em .5em 0;
+    text-decoration: none;
+  }
+  `}</style>
+    <code>{props.overWrite ? props.overWrite : props.APIKey}</code>
+  </a>
+</Link>
+)
+
 type Props = {
   children?: ReactNode;
 };
@@ -26,6 +43,7 @@ const GuideSection = ({children}: Props) => (
         background-color: #f5f2f0;
         border-radius: 3px;
         padding: .2em .5em 0;
+        text-decoration: none;
       }
     `}
     </style>
@@ -50,14 +68,14 @@ const { init, optional, either } = RXP;`} />
 const InitGuide = () => (
   <GuideSection>
   <h2 className="section-title">Initialize the Constructor</h2>
-    <p>The RXP <code className="code-in-text">init</code> function works by accepting text to search for, creating an object 
+    <p>The RXP <APICodeLink APIKey="init" /> function works by accepting text to search for, creating an object 
       that provides methods to modify the search behavior, and then converts it to a 
-      standard regex through the <code className="code-in-text">construct</code> command.</p>
+      standard regex through the <APICodeLink APIKey="construct" /> command.</p>
 
       <CodeSample sample={`init("sample").construct() // 	/sample/
 init("sample").atStart.construct() // 	/^(?:sample)/`} />
       <p>
-      The <code className="code-in-text">init</code> function combines any number of arguments into a text to search for:
+      The <APICodeLink APIKey="init" /> function combines any number of arguments into a text to search for:
       </p>
       <CodeSample sample={`init("search", " for ", "me").construct() // /search for me/`} />
     
@@ -67,7 +85,7 @@ init("sample").atStart.construct() // 	/^(?:sample)/`} />
       </p>
       <CodeSample sample={`init("() and []").construct() // /\\(\\) and \\[\\]/`} />
       <p>
-      <code className="code-in-text">init</code> can also accept regex or other RXP constructor objects for 
+      <APICodeLink APIKey="init" /> can also accept regex or other RXP constructor objects for 
       maximum flexibility without further escaping them:
       </p>
       <CodeSample sample={`const sample = init("sample");
@@ -111,11 +129,11 @@ sample.isOptional.construct() // /(?:sample)?/`} />
 sample.occursOnceOrMore.construct() // /(?:sample)+?/ 
 sample.occursOnceOrMore.and.isGreedy.construct() // /(?:sample)+/`} />
       <p>
-      Regex variables can be defined with the <code className="code-in-text">isVariable</code> method and 
-      then passed to other RXP constructors through <code className="code-in-text">init</code> as often as needed. 
-      When using the <code className="code-in-text">construct</code> method, the variables will be rewritten in 
+      Regex variables can be defined with the <APICodeLink APIKey="isVariable" /> method and 
+      then passed to other RXP constructors through <APICodeLink APIKey="init" /> as often as needed. 
+      When using the <APICodeLink APIKey="construct" /> method, the variables will be rewritten in 
       order of appearance to work as expected. Here is an example using the 
-      preset <code className="code-in-text">anyDigit</code> (covered below):
+      preset <APICodeLink APIKey="anyDigit" /> (covered below):
       </p>
       <CodeSample sample={`const regexVar = anyDigit.occurs(3).and.isVariable("var");
 init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}/>
@@ -126,12 +144,12 @@ const ConstructGuide = () => (
   <GuideSection>
     <h2 className="section-title">Convert to Regex</h2>
       <p>
-      The <code className="code-in-text">construct</code> function can be passed arguments to define the search flags:
+      The <APICodeLink APIKey="construct" /> function can be passed arguments to define the search flags:
       </p>
       <CodeSample sample={`sample.construct("g") // /sample/g 
 sample.construct("global", "s", "I") // /sample/gsi`} />
       <p>
-      If <code className="code-in-text">init</code> is passed a regex argument including a flag, the flag will 
+      If <APICodeLink APIKey="init" /> is passed a regex argument including a flag, the flag will 
       be stripped from it and would need to be added back with construct:
       </p>
       <CodeSample sample={`init(/search/g, " for me").construct() // /search for me/`} />
@@ -142,15 +160,15 @@ const PresetsGuide = () => (
   <GuideSection>
     <h2 className="section-title">Presets</h2>
       <p>
-      To use special characters, such as <code className="code-in-text">\d</code> to match a digit or <code className="code-in-text">\w</code> to 
-      match a letter, you can use the <code className="code-in-text">presets</code> provided with RXP, such 
-      as <code className="code-in-text">anyDigit</code> or <code className="code-in-text">anyLetter</code>. These are preloaded RXP constructor 
+      To use special characters, such as <Link href="/regex-guide#any-digit"><a className="code-in-text"><code>\d</code></a></Link> to match a digit or <Link href="/regex-guide#any-letter"><a className="code-in-text"><code>\w</code></a></Link> to 
+      match a letter, you can use the <APICodeLink APIKey="presets" /> provided with RXP, such 
+      as <APICodeLink APIKey="anyDigit" /> or <APICodeLink APIKey="anyLetter" />. These are preloaded RXP constructor 
       objects with all the functionality built in:
       </p>
       <CodeSample sample={`anyDigit.occurs(3).construct() // /(?:[0123456789]){3}/ 
 anyLetter.atEnd.construct() // /(?:\\w)$/`} />
       <p>
-      Since the <code className="code-in-text">init</code> function will automatically escape special 
+      Since the <APICodeLink APIKey="init" /> function will automatically escape special 
       characters, if you want to pass them in directly without using 
       presets then you would need to use a standard regex:
       </p>
@@ -169,10 +187,11 @@ const ShorthandsGuide = () => (
   <GuideSection>
     <h2 className="section-title">Shorthands</h2>
       <p>
-      <code className="code-in-text">shorthands</code> are a group of functions that create an RXP object and 
+      <APICodeLink APIKey="shorthands" /> are a group of functions that create an RXP object and 
       immediately apply a desired search behavior. These are provided 
       to improve readability, and there is no functional difference 
-      between something like <code className="code-in-text">optional(“text”)</code> and <code className="code-in-text">init(“text”).isOptional</code>.
+      between something like <APICodeLink APIKey="optional" overWrite='optional("text")'/> and 
+      <APICodeLink APIKey="isOptional" overWrite='init("text").isOptional'/>.
       </p>
       <CodeSample sample={`init(
     optional("("), 
@@ -182,13 +201,12 @@ const ShorthandsGuide = () => (
       <p>
       A variety of shorthands are available and can be found on the <Link href="/api-guide#shorthands">API page</Link>. 
       All of these produce the standard RXP constructor object with the unique 
-      exceptions of <code className="code-in-text">withBoundaries</code> and <code className="code-in-text">wrapRXP</code>.
+      exceptions of <APICodeLink APIKey="withBoundaries" /> and <APICodeLink APIKey="wrapRXP" />.
       </p>
   </GuideSection>
 );
 
-const GuidePage = () => {
-return (
+const GuidePage = () => (
   <Layout title="RXP Guide" pageTitle="RXP Guide">
     <ImportGuide />
     <InitGuide />
@@ -198,6 +216,5 @@ return (
     <ShorthandsGuide />
   </Layout>
 );
-}
 
 export default GuidePage;

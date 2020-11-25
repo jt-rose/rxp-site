@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { ReactNode } from "react";
 
 import { CodeSample } from "../components/CodeSample";
+import theme from "../styles/theme";
 
 const APICodeLink = (props: { APIKey: string, overWrite?: string }) => (
 <Link href={`/api-guide#${props.APIKey}`}>
@@ -50,9 +51,62 @@ const GuideSection = ({children}: Props) => (
   </div>
 );
 
+interface TableOfContentsData {
+  title: string;
+  hrefID: string;
+}
+const guideSectionLinks: TableOfContentsData[] = [
+  {
+    title: "Import",
+    hrefID: "import-guide"
+  },
+  {
+    title: "Init Constructor",
+    hrefID: "init-guide"
+  },
+  {
+    title: "Modify Search Behavior",
+    hrefID: "modify-text-guide"
+  },
+  {
+    title: "Convert to Regex",
+    hrefID: "construct-guide"
+  },
+  {
+    title: "Presets",
+    hrefID: "presets-guide"
+  },
+  {
+    title: "Shorthands",
+    hrefID: "shorthands-guide"
+  },
+  {
+    title: "Error Handling",
+    hrefID: "error-handling-guide"
+  }
+]
+
+const TableOfContents = () => (
+  <ul>
+    {guideSectionLinks.map(section => (
+      <li>
+        <Link href={`/guide#${section.hrefID}`}>
+          <a>{section.title}</a>
+        </Link>
+      </li>
+    ))}
+    <style jsx>{`
+      ul {
+        list-style-type: none;
+        color: ${theme.colors.background};
+      }
+    `}</style>
+  </ul>
+)
+
 const ImportGuide = () => (
   <GuideSection>
-    <h2 className="section-title">Import the Library</h2>
+    <h2 className="section-title" id="import-guide">Import the Library</h2>
     <p>RXP can be installed directly through NPM / Yarn:</p>
     <CodeSample sample={`npm i rxp
 yarn add rxp`} />
@@ -67,7 +121,7 @@ const { init, optional, either } = RXP;`} />
 
 const InitGuide = () => (
   <GuideSection>
-  <h2 className="section-title">Initialize the Constructor</h2>
+  <h2 className="section-title" id="init-guide">Initialize the Constructor</h2>
     <p>The RXP <APICodeLink APIKey="init" /> function works by accepting text to search for, creating an object 
       that provides methods to modify the search behavior, and then converts it to a 
       standard regex through the <APICodeLink APIKey="construct" /> command.</p>
@@ -106,7 +160,7 @@ const patternsAndPatternsOhMy = init(
 
 const ModifyTextGuide = () => (
   <GuideSection>
-    <h2 className="section-title">Modify Regex Behavior</h2>
+    <h2 className="section-title" id="modify-text-guide">Modify Regex Behavior</h2>
       <p>
       After creating the RXP constructor object, 
       the provided text can be modified with regex behavior:
@@ -142,7 +196,7 @@ init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}
 
 const ConstructGuide = () => (
   <GuideSection>
-    <h2 className="section-title">Convert to Regex</h2>
+    <h2 className="section-title" id="construct-guide">Convert to Regex</h2>
       <p>
       The <APICodeLink APIKey="construct" /> function can be passed arguments to define the search flags:
       </p>
@@ -158,7 +212,7 @@ sample.construct("global", "s", "I") // /sample/gsi`} />
 
 const PresetsGuide = () => (
   <GuideSection>
-    <h2 className="section-title">Presets</h2>
+    <h2 className="section-title" id="presets-guide">Presets</h2>
       <p>
       To use special characters, such as <Link href="/regex-guide#any-digit"><a className="code-in-text"><code>\d</code></a></Link> to match a digit or <Link href="/regex-guide#any-letter"><a className="code-in-text"><code>\w</code></a></Link> to 
       match a letter, you can use the <APICodeLink APIKey="presets" /> provided with RXP, such 
@@ -185,7 +239,7 @@ init(/\\d/).construct() // result: /\\d/`} />
 
 const ShorthandsGuide = () => (
   <GuideSection>
-    <h2 className="section-title">Shorthands</h2>
+    <h2 className="section-title" id="shorthands-guide">Shorthands</h2>
       <p>
       <APICodeLink APIKey="shorthands" /> are a group of functions that create an RXP object and 
       immediately apply a desired search behavior. These are provided 
@@ -206,14 +260,63 @@ const ShorthandsGuide = () => (
   </GuideSection>
 );
 
+const ErrorHandlingGuide = () => (
+  <GuideSection>
+    <h2 className="section-title" id="error-handling-guide">Error Handling</h2>
+    <p>RXP has been designed with a degree of error handling built in</p>
+    <p>When combining two behaviors with 'and' would result in an invalid regex, the constructor
+      will not make the second option available, allowing only valid behavior combinations
+    </p>
+    <p>The following invalid regex cannot be created through the RXP behavior methods:</p>
+    <CodeSample sample={`/^(?:(?<=this )won't work)/
+/(^nor will this){5}/`}/>
+    <p>The actual behavior options are structured into levels:</p>
+    <ol>
+        <li>or</li>
+        <li>occurs, occursAtLeast, etc.  </li>
+        <li>followedBy, notFollowedBy, etc.</li>
+        <li>atStart, atEnd</li>
+        <li>isOptional, isCaptured, isVariable</li>
+      </ol>
+<p>Each level blocks out the ones that came before it, 
+  and the 'atStart' and 'atEnd' options can also be removed
+  if an option chosen in step 3 would cause issues.</p>
+  <p>In addition to avoiding potential errors, this also gives the benefit
+    of providing clear descriptions. After providing an alternative text with 'or',
+    all of the subsequent behaviors will apply to each alternative - in other words, this.or("that").atEnd
+    will expect either 'this' or 'that' to be at the end (rather than 'this' found anywhere or 'that' specifically at the end).
+  </p>
+  <p>This is designed to be intuitive for the user thanks to intellisense, 
+    and is not something you should have to think about. The only caveat
+     is that when using regex as an argument or composing one RXP unit into another,
+     the RXP constructor will provide all of the possible options initially,
+     so it is still possible to write invalid regex.</p>
+     <CodeSample sample={`const inner = init("text").precededBy("stuff");
+inner.atEnd // works
+inner.atStart // XXX
+
+init(inner).atStart // invalid regex, but due to RXP composition
+// the constructor will still allow this`} />
+<p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner.</p>
+  </GuideSection>
+)
+// table of contents
+
+// ErrorHandlingGuide
+// rror example - behavior combinations
+// remove options, use intellisense
+// warn about composability
+
 const GuidePage = () => (
   <Layout title="RXP Guide" pageTitle="RXP Guide">
+    <TableOfContents />
     <ImportGuide />
     <InitGuide />
     <ModifyTextGuide />
     <ConstructGuide />
     <PresetsGuide />
     <ShorthandsGuide />
+    <ErrorHandlingGuide />
   </Layout>
 );
 

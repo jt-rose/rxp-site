@@ -87,7 +87,8 @@ const guideSectionLinks: TableOfContentsData[] = [
 ]
 
 const TableOfContents = () => (
-  <ul>
+  <div>
+    <ul>
     {guideSectionLinks.map(section => (
       <li>
         <Link href={`/guide#${section.hrefID}`}>
@@ -95,13 +96,32 @@ const TableOfContents = () => (
         </Link>
       </li>
     ))}
+    </ul>
     <style jsx>{`
-      ul {
-        list-style-type: none;
-        color: ${theme.colors.background};
+    div {
+      display: flex;
+      justify-content: center;
+    }
+    ul {
+      margin: 0;
+      padding: 1em 2em;
+      border-top: 2px solid gray;
+      border-bottom: 2px solid gray;
+    }
+      li {
+        list-style-type: square;
+      }
+      a {
+        text-decoration: none;
+      }
+      a:visited {
+        color: black;
+      }
+      a:hover {
+        text-decoration: underline;
       }
     `}</style>
-  </ul>
+  </div>
 )
 
 const ImportGuide = () => (
@@ -127,7 +147,8 @@ const InitGuide = () => (
       standard regex through the <APICodeLink APIKey="construct" /> command.</p>
 
       <CodeSample sample={`init("sample").construct() // 	/sample/
-init("sample").atStart.construct() // 	/^(?:sample)/`} />
+init("sample").atStart.construct() // 	/^(?:sample)/
+init("sample").occurs(5).and.atStart.construct("g") //  /^(?:(?:sample){5})/g`} />
       <p>
       The <APICodeLink APIKey="init" /> function combines any number of arguments into a text to search for:
       </p>
@@ -204,7 +225,7 @@ const ConstructGuide = () => (
 sample.construct("global", "s", "I") // /sample/gsi`} />
       <p>
       If <APICodeLink APIKey="init" /> is passed a regex argument including a flag, the flag will 
-      be stripped from it and would need to be added back with construct:
+      be stripped from it and would need to be added back with <APICodeLink APIKey="construct" />:
       </p>
       <CodeSample sample={`init(/search/g, " for me").construct() // /search for me/`} />
   </GuideSection>
@@ -263,8 +284,8 @@ const ShorthandsGuide = () => (
 const ErrorHandlingGuide = () => (
   <GuideSection>
     <h2 className="section-title" id="error-handling-guide">Error Handling</h2>
-    <p>RXP has been designed with a degree of error handling built in</p>
-    <p>When combining two behaviors with 'and' would result in an invalid regex, the constructor
+    <p>RXP has been designed with a degree of error handling built in. 
+      When combining two behaviors with <APICodeLink APIKey="and" /> would result in an invalid regex, the constructor
       will not make the second option available, allowing only valid behavior combinations
     </p>
     <p>The following invalid regex cannot be created through the RXP behavior methods:</p>
@@ -272,18 +293,18 @@ const ErrorHandlingGuide = () => (
 /(^nor will this){5}/`}/>
     <p>The actual behavior options are structured into levels:</p>
     <ol>
-        <li>or</li>
-        <li>occurs, occursAtLeast, etc.  </li>
-        <li>followedBy, notFollowedBy, etc.</li>
-        <li>atStart, atEnd</li>
-        <li>isOptional, isCaptured, isVariable</li>
+        <li><APICodeLink APIKey="or" /></li>
+        <li><APICodeLink APIKey="occurs" />, <APICodeLink APIKey="occursAtLeast" />, etc.  </li>
+        <li><APICodeLink APIKey="followedBy" />, <APICodeLink APIKey="notFollowedBy" />, etc.</li>
+        <li><APICodeLink APIKey="atStart" />, <APICodeLink APIKey="atEnd" /></li>
+        <li><APICodeLink APIKey="isOptional" />, <APICodeLink APIKey="isCaptured" />, <APICodeLink APIKey="isVariable" /></li>
       </ol>
 <p>Each level blocks out the ones that came before it, 
-  and the 'atStart' and 'atEnd' options can also be removed
+  and the <APICodeLink APIKey="atStart" /> and <APICodeLink APIKey="atEnd" /> options can also be removed
   if an option chosen in step 3 would cause issues.</p>
   <p>In addition to avoiding potential errors, this also gives the benefit
-    of providing clear descriptions. After providing an alternative text with 'or',
-    all of the subsequent behaviors will apply to each alternative - in other words, this.or("that").atEnd
+    of providing clear descriptions. After providing an alternative text with <APICodeLink APIKey="or" />,
+    all of the subsequent behaviors will apply to each alternative - in other words, <code className="code-in-text">init("this").or("that").atEnd</code>
     will expect either 'this' or 'that' to be at the end (rather than 'this' found anywhere or 'that' specifically at the end).
   </p>
   <p>This is designed to be intuitive for the user thanks to intellisense, 
@@ -299,13 +320,7 @@ init(inner).atStart // invalid regex, but due to RXP composition
 // the constructor will still allow this`} />
 <p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner.</p>
   </GuideSection>
-)
-// table of contents
-
-// ErrorHandlingGuide
-// rror example - behavior combinations
-// remove options, use intellisense
-// warn about composability
+);
 
 const GuidePage = () => (
   <Layout title="RXP Guide" pageTitle="RXP Guide">

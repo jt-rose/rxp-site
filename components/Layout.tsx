@@ -124,6 +124,29 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
           color: #333;
           font-family: sans-serif;
         }
+        .guide-section {
+          display: flex;
+          flex-direction: column;
+          padding: 1em 1em 1em 0;
+        }
+        .section-title {
+          text-align: center;
+          padding-top: 60px; 
+          margin-top: -60px;
+        }
+        @media (min-width: ${theme.breakPoints.desktopWidth}) {
+          .section-title {
+            padding-top: 0; 
+            margin-top: 0;
+          }
+        }
+        p .code-in-text {
+          color: #353535;
+          background-color: #f5f2f0;
+          border-radius: 3px;
+          padding: .2em .5em 0;
+          text-decoration: none;
+        }
       `}</style>
   </div>
 );

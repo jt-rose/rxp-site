@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { ReactNode } from "react";
 
 import { CodeSample } from "../components/CodeSample";
-import theme from "../styles/theme";
 
 const APICodeLink = (props: { APIKey: string, overWrite?: string }) => (
 <Link href={`/api-guide#${props.APIKey}`}>
@@ -29,25 +28,6 @@ type Props = {
 const GuideSection = ({children}: Props) => (
   <div className="guide-section">
     {children}
-    <style jsx>{`
-      .guide-section {
-        display: flex;
-        flex-direction: column;
-        padding: 1em 1em 1em 0;
-      }
-      .guide-section > :global(.section-title) {
-        text-align: center;
-        margin: 0;
-      }
-      .guide-section > :global(p .code-in-text) {
-        color: #353535;
-        background-color: #f5f2f0;
-        border-radius: 3px;
-        padding: .2em .5em 0;
-        text-decoration: none;
-      }
-    `}
-    </style>
   </div>
 );
 

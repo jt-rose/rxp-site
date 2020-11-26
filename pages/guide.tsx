@@ -106,7 +106,7 @@ const TableOfContents = () => (
 
 const ImportGuide = () => (
   <GuideSection>
-    <h2 className="section-title" id="import-guide">Import the Library</h2>
+    <h2 className="section-title sticky-header-adjust" id="import-guide">Import the Library</h2>
     <p>RXP can be installed directly through NPM / Yarn:</p>
     <CodeSample sample={`npm i rxp
 yarn add rxp`} />
@@ -121,7 +121,7 @@ const { init, optional, either } = RXP;`} />
 
 const InitGuide = () => (
   <GuideSection>
-  <h2 className="section-title" id="init-guide">Initialize the Constructor</h2>
+  <h2 className="section-title sticky-header-adjust" id="init-guide">Initialize the Constructor</h2>
     <p>The RXP <APICodeLink APIKey="init" /> function works by accepting text to search for, creating an object 
       that provides methods to modify the search behavior, and then converts it to a 
       standard regex through the <APICodeLink APIKey="construct" /> command.</p>
@@ -161,7 +161,7 @@ const patternsAndPatternsOhMy = init(
 
 const ModifyTextGuide = () => (
   <GuideSection>
-    <h2 className="section-title" id="modify-text-guide">Modify Regex Behavior</h2>
+    <h2 className="section-title sticky-header-adjust" id="modify-text-guide">Modify Regex Behavior</h2>
       <p>
       After creating the RXP constructor object, 
       the provided text can be modified with regex behavior:
@@ -197,7 +197,7 @@ init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}
 
 const ConstructGuide = () => (
   <GuideSection>
-    <h2 className="section-title" id="construct-guide">Convert to Regex</h2>
+    <h2 className="section-title sticky-header-adjust" id="construct-guide">Convert to Regex</h2>
       <p>
       The <APICodeLink APIKey="construct" /> function can be passed arguments to define the search flags:
       </p>
@@ -213,7 +213,7 @@ sample.construct("global", "s", "I") // /sample/gsi`} />
 
 const PresetsGuide = () => (
   <GuideSection>
-    <h2 className="section-title" id="presets-guide">Presets</h2>
+    <h2 className="section-title sticky-header-adjust" id="presets-guide">Presets</h2>
       <p>
       To use special characters, such as <Link href="/regex-guide#any-digit"><a className="code-in-text"><code>\d</code></a></Link> to match a digit or <Link href="/regex-guide#any-letter"><a className="code-in-text"><code>\w</code></a></Link> to 
       match a letter, you can use the <APICodeLink APIKey="presets" /> provided with RXP, such 
@@ -233,14 +233,14 @@ init("\\d").construct // result: /\\\\d/
 // correct:
 init(/\\d/).construct() // result: /\\d/`} />
       <p>
-      A full list of presets can be found on the <Link href="/api-guide#presets"><a>API page</a></Link>.
+      A full list of presets can be found on the <Link href="/api-guide#presets"><a>API page</a></Link>
       </p>
   </GuideSection>
 );
 
 const ShorthandsGuide = () => (
   <GuideSection>
-    <h2 className="section-title" id="shorthands-guide">Shorthands</h2>
+    <h2 className="section-title sticky-header-adjust" id="shorthands-guide">Shorthands</h2>
       <p>
       <APICodeLink APIKey="shorthands" /> are a group of functions that create an RXP object and 
       immediately apply a desired search behavior. These are provided 
@@ -263,10 +263,10 @@ const ShorthandsGuide = () => (
 
 const ErrorHandlingGuide = () => (
   <GuideSection>
-    <h2 className="section-title" id="error-handling-guide">Error Handling</h2>
+    <h2 className="section-title sticky-header-adjust" id="error-handling-guide">Error Handling</h2>
     <p>RXP has been designed with a degree of error handling built in. 
       When combining two behaviors with <APICodeLink APIKey="and" /> would result in an invalid regex, the constructor
-      will not make the second option available, allowing only valid behavior combinations
+      will not make the second option available, allowing only valid behavior combinations.
     </p>
     <p>The following invalid regex cannot be created through the RXP behavior methods:</p>
     <CodeSample sample={`/^(?:(?<=this )won't work)/
@@ -281,7 +281,7 @@ const ErrorHandlingGuide = () => (
       </ol>
 <p>Each level blocks out the ones that came before it, 
   and the <APICodeLink APIKey="atStart" /> and <APICodeLink APIKey="atEnd" /> options can also be removed
-  if an option chosen in step 3 would cause issues.</p>
+  if an option chosen in step 3 would cause issues</p>
   <p>In addition to avoiding potential errors, this also gives the benefit
     of providing clear descriptions. After providing an alternative text with <APICodeLink APIKey="or" />,
     all of the subsequent behaviors will apply to each alternative - in other words, <code className="code-in-text">init("this").or("that").atEnd</code>
@@ -298,7 +298,7 @@ inner.atStart // XXX
 
 init(inner).atStart // invalid regex, but due to RXP composition
 // the constructor will still allow this`} />
-<p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner.</p>
+<p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner</p>
   </GuideSection>
 );
 

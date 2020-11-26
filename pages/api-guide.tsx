@@ -66,7 +66,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
 
   return (
     <li key={`list-item-${APIKeyInfo.key}`} id={APIKeyInfo.key}>
-      <div className="accordion-panel"
+      <div className="accordion-panel sticky-header-adjust"
       onMouseEnter={() => toggleHover(true)}
       onMouseLeave={() => toggleHover(false)}
       >
@@ -113,7 +113,7 @@ const AccordionSection = (props: { section: APISection }) => {
   const {section} = props; 
 
   return (
-    <section key={`section-${section.title}`} id={section.title.toLowerCase().replace(" ", "-")} className="api-section">
+    <section key={`section-${section.title}`} id={section.title.toLowerCase().replace(" ", "-")} className="api-section sticky-header-adjust">
       <div className="section-title-container">
       <div className="section-title" onClick={() => togglePanels(!showPanels)}>
         <FaSortDown style={{color: "#fff"}} />

@@ -131,11 +131,13 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
         }
         .section-title {
           text-align: center;
+        }
+        .sticky-header-adjust {
           padding-top: 60px; 
           margin-top: -60px;
         }
         @media (min-width: ${theme.breakPoints.desktopWidth}) {
-          .section-title {
+          .sticky-header-adjust {
             padding-top: 0; 
             margin-top: 0;
           }

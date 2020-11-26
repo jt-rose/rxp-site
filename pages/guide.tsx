@@ -3,23 +3,8 @@ import Link from "next/link";
 import React, { ReactNode } from "react";
 
 import { CodeSample } from "../components/CodeSample";
+import { APICodeLink, RegexCodeLink } from "../components/CodeLink";
 
-const APICodeLink = (props: { APIKey: string, overWrite?: string }) => (
-<Link href={`/api-guide#${props.APIKey}`}>
-  <a className="code-in-text">
-  <style jsx>{`
-  .code-in-text {
-    color: #353535;
-    background-color: #f5f2f0;
-    border-radius: 3px;
-    padding: .2em .5em 0;
-    text-decoration: none;
-  }
-  `}</style>
-    <code>{props.overWrite ? props.overWrite : props.APIKey}</code>
-  </a>
-</Link>
-)
 
 type Props = {
   children?: ReactNode;
@@ -122,15 +107,15 @@ const { init, optional, either } = RXP;`} />
 const InitGuide = () => (
   <GuideSection>
   <h2 className="section-title sticky-header-adjust" id="init-guide">Initialize the Constructor</h2>
-    <p>The RXP <APICodeLink APIKey="init" /> function works by accepting text to search for, creating an object 
+    <p>The RXP <APICodeLink sectionID="init" /> function works by accepting text to search for, creating an object 
       that provides methods to modify the search behavior, and then converts it to a 
-      standard regex through the <APICodeLink APIKey="construct" /> command.</p>
+      standard regex through the <APICodeLink sectionID="construct" /> command.</p>
 
       <CodeSample sample={`init("sample").construct() // 	/sample/
 init("sample").atStart.construct() // 	/^(?:sample)/
 init("sample").occurs(5).and.atStart.construct("g") //  /^(?:(?:sample){5})/g`} />
       <p>
-      The <APICodeLink APIKey="init" /> function combines any number of arguments into a text to search for:
+      The <APICodeLink sectionID="init" /> function combines any number of arguments into a text to search for:
       </p>
       <CodeSample sample={`init("search", " for ", "me").construct() // /search for me/`} />
     
@@ -140,7 +125,7 @@ init("sample").occurs(5).and.atStart.construct("g") //  /^(?:(?:sample){5})/g`} 
       </p>
       <CodeSample sample={`init("() and []").construct() // /\\(\\) and \\[\\]/`} />
       <p>
-      <APICodeLink APIKey="init" /> can also accept regex or other RXP constructor objects for 
+      <APICodeLink sectionID="init" /> can also accept regex or other RXP constructor objects for 
       maximum flexibility without further escaping them:
       </p>
       <CodeSample sample={`const sample = init("sample");
@@ -184,11 +169,11 @@ sample.isOptional.construct() // /(?:sample)?/`} />
 sample.occursOnceOrMore.construct() // /(?:sample)+?/ 
 sample.occursOnceOrMore.and.isGreedy.construct() // /(?:sample)+/`} />
       <p>
-      Regex variables can be defined with the <APICodeLink APIKey="isVariable" /> method and 
-      then passed to other RXP constructors through <APICodeLink APIKey="init" /> as often as needed. 
-      When using the <APICodeLink APIKey="construct" /> method, the variables will be rewritten in 
+      Regex variables can be defined with the <APICodeLink sectionID="isVariable" /> method and 
+      then passed to other RXP constructors through <APICodeLink sectionID="init" /> as often as needed. 
+      When using the <APICodeLink sectionID="construct" /> method, the variables will be rewritten in 
       order of appearance to work as expected. Here is an example using the 
-      preset <APICodeLink APIKey="anyDigit" /> (covered below):
+      preset <APICodeLink sectionID="anyDigit" /> (covered below):
       </p>
       <CodeSample sample={`const regexVar = anyDigit.occurs(3).and.isVariable("var");
 init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}/>
@@ -199,13 +184,13 @@ const ConstructGuide = () => (
   <GuideSection>
     <h2 className="section-title sticky-header-adjust" id="construct-guide">Convert to Regex</h2>
       <p>
-      The <APICodeLink APIKey="construct" /> function can be passed arguments to define the search flags:
+      The <APICodeLink sectionID="construct" /> function can be passed arguments to define the search flags:
       </p>
       <CodeSample sample={`sample.construct("g") // /sample/g 
 sample.construct("global", "s", "I") // /sample/gsi`} />
       <p>
-      If <APICodeLink APIKey="init" /> is passed a regex argument including a flag, the flag will 
-      be stripped from it and would need to be added back with <APICodeLink APIKey="construct" />:
+      If <APICodeLink sectionID="init" /> is passed a regex argument including a flag, the flag will 
+      be stripped from it and would need to be added back with <APICodeLink sectionID="construct" />:
       </p>
       <CodeSample sample={`init(/search/g, " for me").construct() // /search for me/`} />
   </GuideSection>
@@ -215,15 +200,15 @@ const PresetsGuide = () => (
   <GuideSection>
     <h2 className="section-title sticky-header-adjust" id="presets-guide">Presets</h2>
       <p>
-      To use special characters, such as <Link href="/regex-guide#any-digit"><a className="code-in-text"><code>\d</code></a></Link> to match a digit or <Link href="/regex-guide#any-letter"><a className="code-in-text"><code>\w</code></a></Link> to 
-      match a letter, you can use the <APICodeLink APIKey="presets" /> provided with RXP, such 
-      as <APICodeLink APIKey="anyDigit" /> or <APICodeLink APIKey="anyLetter" />. These are preloaded RXP constructor 
+      To use special characters, such as <RegexCodeLink sectionID="any-digit" overWrite="\d"/> to match a digit or <RegexCodeLink sectionID="any-letter" overWrite="\w"/> to 
+      match a letter, you can use the <APICodeLink sectionID="presets" /> provided with RXP, such 
+      as <APICodeLink sectionID="anyDigit" /> or <APICodeLink sectionID="anyLetter" />. These are preloaded RXP constructor 
       objects with all the functionality built in:
       </p>
       <CodeSample sample={`anyDigit.occurs(3).construct() // /(?:[0123456789]){3}/ 
 anyLetter.atEnd.construct() // /(?:\\w)$/`} />
       <p>
-      Since the <APICodeLink APIKey="init" /> function will automatically escape special 
+      Since the <APICodeLink sectionID="init" /> function will automatically escape special 
       characters, if you want to pass them in directly without using 
       presets then you would need to use a standard regex:
       </p>
@@ -242,11 +227,11 @@ const ShorthandsGuide = () => (
   <GuideSection>
     <h2 className="section-title sticky-header-adjust" id="shorthands-guide">Shorthands</h2>
       <p>
-      <APICodeLink APIKey="shorthands" /> are a group of functions that create an RXP object and 
+      <APICodeLink sectionID="shorthands" /> are a group of functions that create an RXP object and 
       immediately apply a desired search behavior. These are provided 
       to improve readability, and there is no functional difference 
-      between something like <APICodeLink APIKey="optional" overWrite='optional("text")'/> and 
-      <APICodeLink APIKey="isOptional" overWrite='init("text").isOptional'/>.
+      between something like <APICodeLink sectionID="optional" overWrite='optional("text")'/> and 
+      <APICodeLink sectionID="isOptional" overWrite='init("text").isOptional'/>.
       </p>
       <CodeSample sample={`init(
     optional("("), 
@@ -256,7 +241,7 @@ const ShorthandsGuide = () => (
       <p>
       A variety of shorthands are available and can be found on the <Link href="/api-guide#shorthands"><a>API page</a></Link>. 
       All of these produce the standard RXP constructor object with the unique 
-      exceptions of <APICodeLink APIKey="withBoundaries" /> and <APICodeLink APIKey="wrapRXP" />.
+      exceptions of <APICodeLink sectionID="withBoundaries" /> and <APICodeLink sectionID="wrapRXP" />.
       </p>
   </GuideSection>
 );
@@ -265,7 +250,7 @@ const ErrorHandlingGuide = () => (
   <GuideSection>
     <h2 className="section-title sticky-header-adjust" id="error-handling-guide">Error Handling</h2>
     <p>RXP has been designed with a degree of error handling built in. 
-      When combining two behaviors with <APICodeLink APIKey="and" /> would result in an invalid regex, the constructor
+      When combining two behaviors with <APICodeLink sectionID="and" /> would result in an invalid regex, the constructor
       will not make the second option available, allowing only valid behavior combinations.
     </p>
     <p>The following invalid regex cannot be created through the RXP behavior methods:</p>
@@ -273,17 +258,17 @@ const ErrorHandlingGuide = () => (
 /(^nor will this){5}/`}/>
     <p>The actual behavior options are structured into levels:</p>
     <ol>
-        <li><APICodeLink APIKey="or" /></li>
-        <li><APICodeLink APIKey="occurs" />, <APICodeLink APIKey="occursAtLeast" />, etc.  </li>
-        <li><APICodeLink APIKey="followedBy" />, <APICodeLink APIKey="notFollowedBy" />, etc.</li>
-        <li><APICodeLink APIKey="atStart" />, <APICodeLink APIKey="atEnd" /></li>
-        <li><APICodeLink APIKey="isOptional" />, <APICodeLink APIKey="isCaptured" />, <APICodeLink APIKey="isVariable" /></li>
+        <li><APICodeLink sectionID="or" /></li>
+        <li><APICodeLink sectionID="occurs" />, <APICodeLink sectionID="occursAtLeast" />, etc.  </li>
+        <li><APICodeLink sectionID="followedBy" />, <APICodeLink sectionID="notFollowedBy" />, etc.</li>
+        <li><APICodeLink sectionID="atStart" />, <APICodeLink sectionID="atEnd" /></li>
+        <li><APICodeLink sectionID="isOptional" />, <APICodeLink sectionID="isCaptured" />, <APICodeLink sectionID="isVariable" /></li>
       </ol>
 <p>Each level blocks out the ones that came before it, 
-  and the <APICodeLink APIKey="atStart" /> and <APICodeLink APIKey="atEnd" /> options can also be removed
+  and the <APICodeLink sectionID="atStart" /> and <APICodeLink sectionID="atEnd" /> options can also be removed
   if an option chosen in step 3 would cause issues</p>
   <p>In addition to avoiding potential errors, this also gives the benefit
-    of providing clear descriptions. After providing an alternative text with <APICodeLink APIKey="or" />,
+    of providing clear descriptions. After providing an alternative text with <APICodeLink sectionID="or" />,
     all of the subsequent behaviors will apply to each alternative - in other words, <code className="code-in-text">init("this").or("that").atEnd</code>
     will expect either 'this' or 'that' to be at the end (rather than 'this' found anywhere or 'that' specifically at the end).
   </p>

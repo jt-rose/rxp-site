@@ -303,7 +303,7 @@ init(inner).atStart // invalid regex, but due to RXP composition
 );
 
 const GuidePage = () => (
-  <Layout title="RXP Guide" pageTitle="RXP Guide">
+  <Layout title="RXP Guide" pageTitle="RXP Guide" sizing="narrow">
     <TableOfContents />
     <ImportGuide />
     <InitGuide />

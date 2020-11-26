@@ -31,9 +31,23 @@ type Props = {
   children?: ReactNode;
   title?: string;
   pageTitle?: string;
+  sizing?: "standard" | "narrow" | "modest" | "large";
 };
 
-const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
+const getLayoutSizing = (sizing: "standard" | "narrow" | "modest" | "large") => {
+  switch(sizing) {
+    case "narrow":
+      return "700";
+    case "modest":
+      return "800";
+    case "large":
+      return "1200";
+    default:
+      return "900"
+  }
+};
+
+const Layout = ({ children, pageTitle = "RXP", title = "RXP", sizing = "standard" }: Props) => (
   <div className="site-container">
     
     <Head>
@@ -99,7 +113,7 @@ const Layout = ({ children, pageTitle = "RXP", title = "RXP" }: Props) => (
       main {
         flex-grow: 1;
         width: 100%;
-        max-width: 700px;
+        max-width: ${getLayoutSizing(sizing)}px;
         margin: auto;
       }
       h1 {

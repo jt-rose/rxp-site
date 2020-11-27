@@ -72,7 +72,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
       >
       <button onClick={() => toggleOpen(!isOpen)}>{APIKeyInfo.key}</button>
       <div className="accordion-panel-content">
-        <p>{APIKeyInfo.description}</p>
+        {APIKeyInfo.description}
         <br />
         <CodeSample sample={APIKeyInfo.codeSample} />
       </div>

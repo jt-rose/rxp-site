@@ -8,32 +8,71 @@ export interface APIKeyData {
 }
 
 const RXPUnitData: APIKeyData[] = [
-  {///////
+  {
     key: "init",
     description:
-      <p>Combines string, regex, or RXP Unit arguments into a single new RXP unit that can be modified with RXP methods and/or constructed into a regex literal</p>,
-    codeSample: `init("sample", / for /, initTextRXP)
-// RXP Unit object with .text property "sample for init"`
+      <div>
+        <p>
+        Creates a new RXP constructor from string, regex, 
+        or other RXP constructors passed as arguments. Provides a 
+        variety of methods to apply regex behavior before being 
+        converted to a standard regex with the 
+        <APICodeLink sectionID="construct" /> method.
+        </p>
+        <p>String arguments will automatically be escaped, while 
+          regex and RXP constructors are accepted as is.
+        </p>
+      </div>,
+    codeSample: `const sample = init("sample");
+sample.construct()  
+//  result: /sample/
+
+sample.occursBetween(3,5).and.atStart.construct()
+//  result: /^(?:(?:sample){3,5})/
+
+init(sample, / for /, "code example").construct("g")
+//  result: /sample for code example/g`
   },
-  {/////////
+  {
     key: "text",
     description:
-      <p>Provides the current string version of the regex that will be formatted into a regex literal with the <APICodeLink sectionID="construct" /> method</p>,
+    <div>
+      <p>
+        Provides the current string version of the regex 
+        that will be formatted into a standard regex with 
+        the <APICodeLink sectionID="construct" /> method.
+      </p>
+      <p>
+        The text property is exposed for use in composing 
+        RXP constructors, but <APICodeLink sectionID="construct" />
+         should be used when actually formatting the regex. 
+      </p>
+    </div>
+      ,
     codeSample: `init("escape [ me").text
-//  result: "escape \\[ me"`
+//  result: "escape \\\\[ me"`
   },
-  {///////////
+  {
     key: "construct",
     description:
-      <p>Converts the stored regex string into a regex literal, while correctly reconstructing variables. Regex flags can be specified as arguments passed to the function.</p>,
-    codeSample: `sample.construct() //  result: /sample/
-sample.construct("g") // result: /sample/g
-sample.construct("global", "i", "s") // result: /sample/gis`
+      <p>Transforms the RXP constructor into a standard regex, 
+        while correctly reconstructing 
+        <APICodeLink sectionID="isVariable" overWrite="variables"/>. 
+        Regex flags can be specified as arguments passed to the function.
+      </p>,
+    codeSample: `sample.construct()
+//  result: /sample/
+
+sample.construct("g")
+// result: /sample/g
+
+sample.construct("global", "i", "s")
+// result: /sample/gis`
   },
-  {/////////
+  {
     key: "and",
     description:
-      <p>Extends behavior modifiers applied to the original regex search text</p>,
+      <p>Extends an RXP behavior method to apply additional behaviors</p>,
     codeSample: `init("sample").occurs(3).and.atStart.construct() 
 //  result: /^(?:(?:sample){3})/`
   },
@@ -177,8 +216,9 @@ const step5Data: APIKeyData[] = [
         A string argument can be provided to declare the variable name, 
         or no argument can be provided and RXP will create a unique name 
         for you</p>,
-    codeSample: `sample.isVariable("myVariable").construct() 
-//  result: /(?<myVariable>sample)/ or /\\k<myVariable>/
+    codeSample: `const RXPVar = sample.isVariable("myVariable")
+init(RXPVar, " and ", RXPVar).construct() 
+//  result: /(?<myVariable>sample) and \\\\k<myVariable>/
 //  the variable will be formatted based on its position in the regex`
   },
 ];

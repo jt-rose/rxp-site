@@ -200,25 +200,29 @@ const step5Data: APIKeyData[] = [
     description:
       <p>Marks search text as being individually captured when found. By default, RXP uses noncapture groupings, but this method will override that behavior</p>,
     codeSample: `sample.isCaptured.construct() 
-//  result: /((?:sample))/`
+//  result: /(sample)/`
   },
-  {////////////////////
+  {
     key: "isVariable",
     description:
+    <div>
       <p>Marks the search text as a regex variable. 
-        This variable can then be reused in the RXP constructor 
-        to make sure both instances correspond. RXP will parse the 
-        variables when the <APICodeLink sectionID="construct" /> method 
+        This variable can then be used multiple times in a new 
+        RXP constructor.</p> 
+      <p>RXP will parse the variables when the 
+        <APICodeLink sectionID="construct" /> method 
         is called and reconfigure them based on the order of usage so 
-        they will work as expected. By abstracting this process away, 
-        you can just declare the variable, insert it wherever you need, 
-        and not have to worry about using the appropriate syntax. 
+        that they will work as expected.
+      </p>
+      <p> 
         A string argument can be provided to declare the variable name, 
         or no argument can be provided and RXP will create a unique name 
-        for you</p>,
-    codeSample: `const RXPVar = sample.isVariable("myVariable")
+        for you.
+      </p>
+    </div>,
+    codeSample: `const RXPVar = init(/\\d{3}/).isVariable("myVariable")
 init(RXPVar, " and ", RXPVar).construct() 
-//  result: /(?<myVariable>sample) and \\\\k<myVariable>/
+//  result: /(?<myVariable>\\d{3}) and \\\\k<myVariable>/
 //  the variable will be formatted based on its position in the regex`
   },
 ];
@@ -301,7 +305,7 @@ const shorthandsData: APIKeyData[] = [
   {
     key: "either",
     description:
-      <p>Accepts two or more arguments that will be searched as alternate options. Equivalent to <APICodeLink sectionID="or" overWrite="init('north').or('south')"/>.</p>,
+      <p>Accepts two or more arguments that will be searched as alternate options. Equivalent to <APICodeLink sectionID="or" overWrite='init("sample").or("other")'/>.</p>,
     codeSample: `either("north", "south").construct() 
 //  result: /(?:(?:north)|(?:south))/
 
@@ -312,21 +316,21 @@ either(...directions).construct()
   {
     key: "optional",
     description:
-      <p>Marks text as optional. Equivalent to <APICodeLink sectionID="isOptional" overWrite="init('maybe').isOptional" />.</p>,
+      <p>Marks text as optional. Equivalent to <APICodeLink sectionID="isOptional" overWrite='init("sample").isOptional' />.</p>,
     codeSample: `optional("maybe").construct() 
 //  result: /(?:maybe)?/`
   },
   {
     key: "oneOrMore",
     description:
-      <p>Marks search text as occuring once or more. Equivalent to <APICodeLink sectionID="occursOnceOrMore" overWrite="init('sample').occursOnceOrMore"/>.</p>,
+      <p>Marks search text as occuring once or more. Equivalent to <APICodeLink sectionID="occursOnceOrMore" overWrite='init("sample").occursOnceOrMore'/>.</p>,
     codeSample: `oneOrMore("sample").construct() 
 //  result: /(?:sample)+?/`
   },
   {
     key: "zeroOrMore",
     description:
-      <p>Marks search text as occuring zero or more times. Equivalent to <APICodeLink sectionID="occursZeroOrMore" overWrite="init('sample').occursZeroOrMore" />.</p>,
+      <p>Marks search text as occuring zero or more times. Equivalent to <APICodeLink sectionID="occursZeroOrMore" overWrite='init("sample").occursZeroOrMore' />.</p>,
     codeSample: `zeroOrMore("sample").construct() 
 //  result: /(?:sample)*?/`
   },
@@ -334,14 +338,18 @@ either(...directions).construct()
     key: "wrapRXP",
     description:
       <p>Creates a new <APICodeLink sectionID="init" />-style function that will wrap any arguments provided to it in the arguments passed to wrapRXP</p>,
-    codeSample: `const wrapBrackets = wrapRXP("[", "]")
-wrapBrackets("sample").construct() 
+    codeSample: `const withBrackets = wrapRXP("[", "]")
+withBrackets("sample").construct() 
 //  result: /\\[sample\\]/`
   },
-  {//////////////// note about uniqie constructor
+  {
     key: "withBoundaries",
     description:
-      <p>Marks the arguments provided as being surrounded by <RegexCodeLink sectionID="word-boundary" overWrite="\b"/> boundary markers</p>,
+      <p>
+        Provides an <APICodeLink sectionID="init" />-style 
+        function that automatically surrounds the search text 
+        with <RegexCodeLink sectionID="word-boundary" overWrite="\b"/> 
+        boundary markers</p>,
     codeSample: `withBoundaries("sample").construct() 
 // result: /\\bsample\\b/`
   },

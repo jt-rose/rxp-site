@@ -1,11 +1,38 @@
 import Layout from "../components/Layout";
+import Link from "next/link";
 import theme from "../styles/theme";
 
 import { regexData, specialCharData } from "../utils/regexData";
 
+const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
+  const { regexName, APILink } = props;
+  if (APILink) {
+    return (
+      <div>
+        <Link href={`/guide#${APILink}`}>
+        <a>{regexName}</a>
+      </Link>
+        <style jsx>{`
+          a {
+          text-decoration: none;
+          color: ${theme.colors.background};
+          font-weight: bold;
+        }
+      `}</style>
+      </div>
+    );
+  } else {
+    return (
+      <>
+        {regexName}
+      </>
+    );
+  }
+};
+
 const RegexGuidePage = () => (
   <Layout title="regex-guide" pageTitle="Regex Guide">
-    <p>A quick reference guide to common regex characters.</p>
+    <p>A quick reference guide to common regex characters</p>
     <h2>Regex Behavior Modifiers</h2>
     <table>
       <thead>
@@ -18,9 +45,11 @@ const RegexGuidePage = () => (
       </thead>
       <tbody>
       {regexData.map(data => (
-        <tr id={data.name.replace(" ", "-")}>
+        <tr id={data.name.replace(/ /g, "-")}>
           <td>{data.symbol}</td>
-          <td>{data.name}</td>
+          <td>
+            <OptionalLink regexName={data.name} APILink={data.APILink}/>
+          </td>
           <td>{data.description}</td>
           <td>{data.example}</td>
         </tr>
@@ -39,9 +68,11 @@ const RegexGuidePage = () => (
       </thead>
     <tbody>
       {specialCharData.map(data => (
-        <tr id={data.name.replace(" ", "-")}>
+        <tr id={data.name.replace(/ /g, "-")}>
         <td>{data.symbol}</td>
-        <td>{data.name}</td>
+        <td>
+          <OptionalLink regexName={data.name} APILink={data.APILink}/>
+        </td>
         <td>{data.description}</td>
       </tr>
       ))}
@@ -52,7 +83,6 @@ const RegexGuidePage = () => (
           border-collapse: collapse;
           margin: 25px;
           font-size: 0.9em;
-          font-damily: sans-serif;
           min-width: 400px;
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
         }
@@ -67,23 +97,15 @@ const RegexGuidePage = () => (
        tbody tr {
           border-bottom: 1px solid #dddddd;
       }
-      
       tbody tr:nth-of-type(even) {
           background-color: #f3f3f3;
       }
-      
       tbody tr:last-of-type {
           border-bottom: 2px solid ${theme.colors.background};
       }
-      tbody tr:hover {
-        font-weight: bold;
-        color: ${theme.colors.background};
-    }
     p, h2 {
       text-align: center;
     }
-    
-      
       `}</style>
   </Layout>
 );

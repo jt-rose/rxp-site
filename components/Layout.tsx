@@ -76,7 +76,9 @@ const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Pro
 
     <footer>
       <div className="footer-spacing" />
-      <span>Developed by Jeff Rose, 2020</span>
+      <span>Developed by <a href="https://github.com/jt-rose" className="footer-link">
+        Jeff Rose
+        </a>, 2020</span>
       <div className="techstack-icons">
         <IconWithHover Icon={SiReact} linkPath="https://reactjs.org/" />
         <IconWithHover Icon={SiNextDotJs} linkPath="https://nextjs.org/" />
@@ -123,6 +125,12 @@ const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Pro
         border-top: solid gray 2px;
         display: flex;
         justify-content: space-between;
+      }
+      .footer-link {
+        color: #333;
+      }
+      .footer-link:hover {
+        color: ${theme.colors.background};
       }
       .techstack-icons {
         padding-right: 1em;

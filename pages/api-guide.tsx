@@ -172,7 +172,7 @@ const APIPage = () => {
   
 
   return (
-    <Layout title="RXP API" pageTitle="API" sizing="modest">
+    <Layout title="API Guide" pageTitle="API Guide" sizing="modest">
       <APIGuide />
     </Layout>
   );

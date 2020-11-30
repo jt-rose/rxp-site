@@ -20,7 +20,7 @@ const Examples = () => (
 );
 
 const IndexPage = () => (
-  <Layout title="RXP" pageTitle="RXP">
+  <Layout title="Home" pageTitle="RXP">
     
     <p>A descriptive constructor for regular expressions</p>
 

@@ -9,7 +9,7 @@ const PlaygroundPage = () => {
     setWidth(window.innerWidth);
   });
   return (
-    <Layout title="RXP Playground" pageTitle="RXP Playground" sizing="large">
+    <Layout title="Playground" pageTitle="RXP Playground" sizing="large">
       <h3>
         Using the embedded playground below, you can directly test out RXP code, courtesy of 
          <span>

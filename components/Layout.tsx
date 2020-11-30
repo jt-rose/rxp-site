@@ -47,11 +47,11 @@ const getLayoutSizing = (sizing: "standard" | "narrow" | "modest" | "large") => 
   }
 };
 
-const Layout = ({ children, pageTitle = "RXP", title = "RXP", sizing = "standard" }: Props) => (
+const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Props) => (
   <div className="site-container">
     
     <Head>
-      <title>{title}</title>
+      <title>{`RXP | ${title}`}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>

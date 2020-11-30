@@ -5,14 +5,9 @@ import React, { ReactNode } from "react";
 import { CodeSample } from "../components/CodeSample";
 import { APICodeLink, RegexCodeLink } from "../components/CodeLink";
 
-
-type Props = {
-  children?: ReactNode;
-};
-
-const GuideSection = ({children}: Props) => (
+const GuideSection = (props: {children: ReactNode}) => (
   <div className="guide-section">
-    {children}
+    {props.children}
   </div>
 );
 
@@ -115,21 +110,27 @@ const InitGuide = () => (
 init("sample").atStart.construct() // 	/^(?:sample)/
 init("sample").occurs(5).and.atStart.construct("g") //  /^(?:(?:sample){5})/g`} />
       <p>
-      The <APICodeLink sectionID="init" /> function combines any number of arguments into a text to search for:
-      </p>
-      <CodeSample sample={`init("search", " for ", "me").construct() // /search for me/`} />
-    
-      <p>
-      String arguments will automatically be escaped, so you can enter the 
+      The <APICodeLink sectionID="init" /> function combines any number of arguments into a text to search for. 
+      String, regex, and even other RXP constructors can be provided to <APICodeLink sectionID="init" />. String arguments will automatically be escaped, so you can enter the 
       text exactly as you expect to see it:
       </p>
-      <CodeSample sample={`init("() and []").construct() // /\\(\\) and \\[\\]/`} />
-      <p>
-      <APICodeLink sectionID="init" /> can also accept regex or other RXP constructor objects for 
-      maximum flexibility without further escaping them:
-      </p>
-      <CodeSample sample={`const sample = init("sample");
+      <CodeSample sample={`init("search", " for ", "me").construct() // /search for me/
+
+init("() and []").construct() // /\\(\\) and \\[\\]/
+
+const sample = init("sample")
 init("test ", /out /, sample).construct() // /test out sample/`} />
+      <p>
+        Once the search text has been specified with <APICodeLink sectionID="init" />,
+        alternative text can be specified with <APICodeLink sectionID="or" />. 
+        Any behavior methods used after <APICodeLink sectionID="or" /> will then be applied to both options:
+      </p>
+      <CodeSample sample={`const thisOrThat = init("this").or("that")
+thisOrThat.construct()
+//  result: /(?:this)|(?:that)/
+
+thisOrThat.occurs(5).construct()
+//  result: /(?:(?:this)|(?:that)){5}/`} />
       <p>
       Using this pattern, regex built through RXP become modular and composable, 
       making it easy to reuse or extend them:
@@ -230,8 +231,7 @@ const ShorthandsGuide = () => (
       <APICodeLink sectionID="shorthands" /> are a group of functions that create an RXP object and 
       immediately apply a desired search behavior. These are provided 
       to improve readability, and there is no functional difference 
-      between something like <APICodeLink sectionID="optional" overWrite='optional("text")'/> and 
-      <APICodeLink sectionID="isOptional" overWrite='init("text").isOptional'/>.
+      between something like <APICodeLink sectionID="optional" overWrite='optional("text")'/> and <APICodeLink sectionID="isOptional" overWrite='init("text").isOptional'/>.
       </p>
       <CodeSample sample={`init(
     optional("("), 
@@ -251,44 +251,45 @@ const ErrorHandlingGuide = () => (
     <h2 className="section-title sticky-header-adjust" id="error-handling-guide">Error Handling</h2>
     <p>RXP has been designed with a degree of error handling built in. 
       When combining two behaviors with <APICodeLink sectionID="and" /> would result in an invalid regex, the constructor
-      will not make the second option available, allowing only valid behavior combinations.
+      will not make the subsequent option available, allowing only valid behavior combinations.
     </p>
-    <p>The following invalid regex cannot be created through the RXP behavior methods:</p>
+    <p>This is designed to be intuitive for the user thanks to intellisense, 
+    and is not something you should have to think about. The options presented will 
+    naturally guide you into creating valid regex.
+  </p>
+    <p>
+    The actual behaviors are structured into levels, with each one locking out previous levels:
+    </p>
+    <ol>
+      <li><APICodeLink sectionID="occurs" />, <APICodeLink sectionID="occursAtLeast" />, etc.  </li>
+      <li><APICodeLink sectionID="followedBy" />, <APICodeLink sectionID="notFollowedBy" />, etc.</li>
+      <li><APICodeLink sectionID="atStart" />, <APICodeLink sectionID="atEnd" /></li>
+      <li><APICodeLink sectionID="isOptional" />, <APICodeLink sectionID="isCaptured" />, <APICodeLink sectionID="isVariable" /></li>
+    </ol>
+    <p>
+    By applying this structure, it is not possible to follow a method like <APICodeLink sectionID="atStart" /> with options such as <APICodeLink sectionID="occurs" /> 
+    and <APICodeLink sectionID="precededBy" />, both of which would result in 
+    invalid regex:
+    </p>
     <CodeSample sample={`/^(?:(?<=this )won't work)/
 /(^nor will this){5}/`}/>
-    <p>The actual behavior options are structured into levels:</p>
-    <ol>
-        <li><APICodeLink sectionID="or" /></li>
-        <li><APICodeLink sectionID="occurs" />, <APICodeLink sectionID="occursAtLeast" />, etc.  </li>
-        <li><APICodeLink sectionID="followedBy" />, <APICodeLink sectionID="notFollowedBy" />, etc.</li>
-        <li><APICodeLink sectionID="atStart" />, <APICodeLink sectionID="atEnd" /></li>
-        <li><APICodeLink sectionID="isOptional" />, <APICodeLink sectionID="isCaptured" />, <APICodeLink sectionID="isVariable" /></li>
-      </ol>
-<p>Each level blocks out the ones that came before it, 
-  and the <APICodeLink sectionID="atStart" /> and <APICodeLink sectionID="atEnd" /> options can also be removed
-  if an option chosen in step 3 would cause issues</p>
-  <p>In addition to avoiding potential errors, this also gives the benefit
-    of providing clear descriptions. After providing an alternative text with <APICodeLink sectionID="or" />,
-    all of the subsequent behaviors will apply to each alternative - in other words, <code className="code-in-text">init("this").or("that").atEnd</code>
-    will expect either 'this' or 'that' to be at the end (rather than 'this' found anywhere or 'that' specifically at the end).
-  </p>
-  <p>This is designed to be intuitive for the user thanks to intellisense, 
-    and is not something you should have to think about. The only caveat
-     is that when using regex as an argument or composing one RXP unit into another,
-     the RXP constructor will provide all of the possible options initially,
-     so it is still possible to write invalid regex.</p>
+    <p>
+      There is one important caveat here - when using regex or RXP constructors as arguments in <APICodeLink sectionID="init" /> or related functions,
+     the resulting RXP constructor will provide all of the possible options initially,
+     so it is still possible to write invalid regex:</p>
      <CodeSample sample={`const inner = init("text").precededBy("stuff");
 inner.atEnd // works
-inner.atStart // XXX
+inner.atStart // X - unavailable
 
 init(inner).atStart // invalid regex, but due to RXP composition
 // the constructor will still allow this`} />
-<p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner</p>
-  </GuideSection>
+<p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner
+    </p>
+    </GuideSection>
 );
 
 const GuidePage = () => (
-  <Layout title="RXP Guide" pageTitle="RXP Guide" sizing="narrow">
+  <Layout title="Guide" pageTitle="RXP Guide" sizing="narrow">
     <TableOfContents />
     <ImportGuide />
     <InitGuide />

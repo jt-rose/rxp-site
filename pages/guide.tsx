@@ -82,7 +82,7 @@ const TableOfContents = () => (
       }
     `}</style>
   </div>
-)
+);
 
 const ImportGuide = () => (
   <GuideSection>
@@ -277,11 +277,11 @@ const ErrorHandlingGuide = () => (
       There is one important caveat here - when using regex or RXP constructors as arguments in <APICodeLink sectionID="init" /> or related functions,
      the resulting RXP constructor will provide all of the possible options initially,
      so it is still possible to write invalid regex:</p>
-     <CodeSample sample={`const inner = init("text").precededBy("stuff");
-inner.atEnd // works
-inner.atStart // X - unavailable
+     <CodeSample sample={`const example = init("text").precededBy("stuff");
+example.atEnd // works
+example.atStart // X - unavailable
 
-init(inner).atStart // invalid regex, but due to RXP composition
+init(example).atStart // invalid regex, but due to RXP composition
 // the constructor will still allow this`} />
 <p> RXP does a lot to deter mistakes, but it is not fullproof and regex should still be built in a careful manner
     </p>

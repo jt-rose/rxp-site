@@ -14,42 +14,95 @@ const backgroundHover = theme.colors.backgroundHover;
 const {
   step1Data,
   step2Data,
-  step2point5data,
   step3Data,
   step4Data,
-  step5Data,
 } = APIData;
-const allStepsData = [
-  ...step1Data,
-  ...step2Data,
-  ...step2point5data,
-  ...step3Data,
-  ...step4Data,
-  ...step5Data,
-];
+
+const MethodSectionDivider = (props: {title: string}) => (
+  <div className="outer">
+    <div className="inner">
+    <p>{props.title}</p>
+  </div>
+    <style jsx>{`
+    .outer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .inner {
+      width: 300px;
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(180deg, 
+      rgba(0,0,0,0) calc(50% - 1px), 
+      rgba(192,192,192,1) calc(50%), 
+      rgba(0,0,0,0) calc(50% + 1px)
+      );
+    }
+    p {
+      margin: auto;
+      padding: 0 1em;
+      background-color: #fff;
+    }
+    `}</style>
+  </div>
+);
 
 interface APISection {
   title: string;
-  ApiKeys: APIKeyData[]
+  content: APIKeyData[];
+  subHeaders: false;
 }
 
-const APIGuideSections: APISection[] = [
+interface SubHeaderData {
+  subHeader: string; 
+  content: APIKeyData[];
+}
+
+interface APISectionWithHeaders {
+  title: string;
+  content: SubHeaderData[];
+  subHeaders: true;
+}
+
+
+const APIGuideSections: (APISection | APISectionWithHeaders)[] = [
   {
     title: "RXP Constructor",
-    ApiKeys: APIData.RXPUnitData,
+    content: APIData.RXPUnitData,
+    subHeaders: false
   },
   {
     title: "RXP Methods",
-    ApiKeys: allStepsData,
+    content: [
+      {
+        subHeader: "Set Frequency",
+        content: step1Data
+      },
+      {
+        subHeader: "Set Surroundings",
+        content: step2Data
+      },
+      {
+        subHeader: "Set Positioning",
+        content: step3Data
+      },
+      {
+        subHeader: "Set Options",
+        content: step4Data
+      }
+    ],
+    subHeaders: true
   },
-  // add more methods
   {
     title: "Presets",
-    ApiKeys: APIData.presetsData,
+    content: APIData.presetsData,
+    subHeaders: false
   },
   {
     title: "Shorthands",
-    ApiKeys: APIData.shorthandsData,
+    content: APIData.shorthandsData,
+    subHeaders: false
   },
 ];
 
@@ -108,7 +161,28 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
   );
 };
 
-const AccordionSection = (props: { section: APISection }) => {
+const AccordionPanelGroup = (props: {APIKeys: APIKeyData[], showPanels: boolean}) => (
+  <ul>
+          {props.APIKeys.map((x, i) => (
+            <AccordionPanel APIKeyInfo={x} 
+              firstChild={ i === 0} 
+              lastChild={i === props.APIKeys.length - 1}
+              key={`accordion-${x.key}`} 
+              />
+          ))}
+          <style jsx>{`
+          ul {
+            padding: 0;
+            list-style: none;
+          }
+          ul {
+            display: ${props.showPanels ? "block" : "none"}
+          }
+          `}</style>
+        </ul>
+);
+
+const AccordionSection = (props: { section: APISection | APISectionWithHeaders, lastSection: boolean }) => {
   const [showPanels, togglePanels] = useState(true); 
   const {section} = props; 
 
@@ -121,26 +195,17 @@ const AccordionSection = (props: { section: APISection }) => {
           <FaSortDown style={{transform: `${showPanels ? "none" : "rotate(180deg)"}`, paddingBottom: `${showPanels ? "5px" : "none"}`}}/>
       </div>
       </div>
-        
-        
-        <ul>
-          {section.ApiKeys.map((x, i) => (
-            <AccordionPanel APIKeyInfo={x} 
-              firstChild={ i === 0} 
-              lastChild={i === section.ApiKeys.length - 1}
-              key={`accordion-${x.key}`} 
-              />
-          ))}
-        </ul>
+        {section.subHeaders ? section.content.map(keys => (
+            <div key={`subHeader-section-${keys.subHeader}`}>
+              <MethodSectionDivider title={keys.subHeader}/>
+              <AccordionPanelGroup APIKeys={keys.content} showPanels={showPanels}/>
+            </div>
+          )) : (<AccordionPanelGroup APIKeys={section.content} showPanels={showPanels}/>)}
         <style jsx>{`
           .api-section {
             padding-left: 2em;
-            padding-right: 2em; 
-          }
-          ul {
-            padding: 0;
-            list-style: none;
-            display: ${showPanels ? "block" : "none"}
+            padding-right: 2em;
+            margin-bottom: ${props.lastSection ? "2em" : "3em"};
           }
           .section-title-container {
             display: flex;
@@ -162,8 +227,12 @@ const AccordionSection = (props: { section: APISection }) => {
 
 const APIGuide = () => (
   <div>
-    {APIGuideSections.map((section) => (
-      <AccordionSection section={section} key={`${section.title}-key`}/>
+    {APIGuideSections.map((section, i) => (
+      <AccordionSection 
+        section={section} 
+        key={`${section.title}-key`}
+        lastSection={APIGuideSections.length === (i + 1)}  
+      />
     ))}
   </div>
 );

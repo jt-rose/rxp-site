@@ -53,6 +53,17 @@ init(sample, / for /, "code example").construct("g")
 //  result: "escape \\\\[ me"`
   },
   {
+    key: "or",
+    description:
+      <p>Provides an alternative possible match for the initial search text. Every unique argument provided will result in an additional alternative possible text.</p>,
+    codeSample: `sample.or('something else').construct() 
+//  result: /(?:(?:sample)|(?:something else))/
+
+sample.or("this", "that").construct()
+//  result: /(?:(?:sample)|(?:this)|(?:that))/
+`
+  },
+  {
     key: "construct",
     description:
       <p>Transforms the RXP constructor into a standard regex, 
@@ -78,21 +89,8 @@ sample.construct("global", "i", "s")
   },
 ];
 
+
 const step1Data: APIKeyData[] = [
-  {
-    key: "or",
-    description:
-      <p>Provides an alternative possible match for the initial search text. Every unique argument provided will result in an additional alternative possible text.</p>,
-    codeSample: `sample.or('something else').construct() 
-//  result: /(?:(?:sample)|(?:something else))/
-
-sample.or("this", "that").construct()
-//  result: /(?:(?:sample)|(?:this)|(?:that))/
-`
-  },
-];
-
-const step2Data: APIKeyData[] = [
   {
     key: "occurs",
     description:
@@ -128,19 +126,16 @@ const step2Data: APIKeyData[] = [
     codeSample: `sample.occursBetween( 2, 4).construct() 
 //  result: /(?:sample){2,4}/`
   },
-];
-
-const step2point5data: APIKeyData[] = [
   {
     key: "isGreedy",
     description:
       <p>Modifies previous search marker to use a greedy search. Can be applied after using either the <APICodeLink sectionID="occursOnceOrMore" /> or <APICodeLink sectionID="occursZeroOrMore" /> constructor methods, or after the <APICodeLink sectionID="oneOrMore" /> or <APICodeLink sectionID="zeroOrMore" /> shorthands.</p>,
     codeSample: `sample.occursOnceOrMore.and.isGreedy.construct() 
 //  result: /(?:sample)+/`
-  },
+  }
 ];
 
-const step3Data: APIKeyData[] = [
+const step2Data: APIKeyData[] = [
   {
     key: "followedBy",
     description:
@@ -171,7 +166,7 @@ const step3Data: APIKeyData[] = [
   },
 ];
 
-const step4Data: APIKeyData[] = [
+const step3Data: APIKeyData[] = [
   {
     key: "atStart",
     description:
@@ -187,7 +182,7 @@ const step4Data: APIKeyData[] = [
   },
 ];
 
-const step5Data: APIKeyData[] = [
+const step4Data: APIKeyData[] = [
   {
     key: "isOptional",
     description:
@@ -359,10 +354,8 @@ export const APIData = {
   RXPUnitData,
   step1Data,
   step2Data,
-  step2point5data,
   step3Data,
   step4Data,
-  step5Data,
   presetsData,
   shorthandsData,
 };

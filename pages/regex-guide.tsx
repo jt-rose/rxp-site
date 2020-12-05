@@ -9,7 +9,7 @@ const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
   if (APILink) {
     return (
       <div>
-        <Link href={`/guide#${APILink}`}>
+        <Link href={`/api-guide#${APILink}`}>
         <a>{regexName}</a>
       </Link>
         <style jsx>{`

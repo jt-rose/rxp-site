@@ -233,15 +233,36 @@ const AccordionSection = (props: { section: APISection | APISectionWithHeaders, 
   const closeAllSectionTabs = () => removeTabs(sectionKeys)
   const allKeysOpen = sectionKeys.every(key => openTabs.includes(key));
 
+  const [isHovered, toggleHover] = useState(false);
+
   return (
     <section key={`section-${title}`} id={title.toLowerCase().replace(" ", "-")} className="api-section sticky-header-adjust">
       <div className="section-title-container">
       <div className="section-title" >
         <FaPlusSquare style={{color: "#fff"}} />
-          <h2 onClick={allKeysOpen ? () => closeAllSectionTabs() : () => openAllSectionTabs()}>
+          <h2 
+            onClick={allKeysOpen ? () => closeAllSectionTabs() : () => openAllSectionTabs()}
+            onMouseEnter={() => toggleHover(true)}
+            onMouseLeave={() => toggleHover(false)}
+            >
             { title }
           </h2>
-          {allKeysOpen ? <FaMinusSquare /> : <FaPlusSquare />}
+          {allKeysOpen ? 
+          <span className="section-icon">
+            <FaMinusSquare 
+            onClick={allKeysOpen ? () => closeAllSectionTabs() : () => openAllSectionTabs()}
+              onMouseEnter={() => toggleHover(true)}
+              onMouseLeave={() => toggleHover(false)}
+              />
+          </span>
+             
+            : <span className="section-icon">
+              <FaPlusSquare 
+            onClick={allKeysOpen ? () => closeAllSectionTabs() : () => openAllSectionTabs()}
+                onMouseEnter={() => toggleHover(true)}
+                onMouseLeave={() => toggleHover(false)}
+              />
+              </span>}
           {/*<FaPlusSquare style={{transform: `${allKeysOpen ? "rotate(180deg)" : "none" }`, paddingBottom: `${allKeysOpen ? "none" : "5px"}`}}/>*/}
       </div>
       </div>
@@ -271,8 +292,14 @@ const AccordionSection = (props: { section: APISection | APISectionWithHeaders, 
             margin: 0;
             cursor: pointer;
           }
-          h2:hover {
-            color: ${theme.colors.background};
+          h2 {
+            color: ${isHovered ? backgroundColor : undefined};
+          }
+          .section-icon {
+            cursor: pointer;
+          }
+          .section-icon {
+            color: ${isHovered ? backgroundColor : undefined};
           }
         `}</style>
       </section>
@@ -295,7 +322,6 @@ const APIGuide = () => {
   );
 }
 
-// change arrow to hover, open individual section
 const APIPage = () => {
   const routeQuery = useRouter().asPath.replace("/api-guide#", "");
 

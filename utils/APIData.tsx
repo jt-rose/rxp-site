@@ -1,5 +1,18 @@
 import { ReactNode } from "react";
 import { APICodeLink, RegexCodeLink } from "../components/CodeLink";
+import { useOpenTabsContext } from "../context/OpenTabsContext";
+
+const OpenTabsAPICodeLink = (props: { sectionID: string, overWrite?: string} ) => {
+  const { sectionID, overWrite } = props;
+  const { addTabs } = useOpenTabsContext();
+  return (
+    <span onClick={() => addTabs([sectionID])}>
+      <APICodeLink sectionID={sectionID} overWrite={overWrite}/>
+    </span>
+    
+  )
+}
+
 
 export interface APIKeyData {
   key: string;
@@ -17,7 +30,7 @@ const RXPUnitData: APIKeyData[] = [
         or other RXP constructors passed as arguments. Provides a 
         variety of methods to apply regex behavior before being 
         converted to a standard regex with the 
-        <APICodeLink sectionID="construct" /> method.
+        <OpenTabsAPICodeLink sectionID="construct" /> method.
         </p>
         <p>String arguments will automatically be escaped, while 
           regex and RXP constructors are accepted as is.
@@ -40,11 +53,11 @@ init(sample, / for /, "code example").construct("g")
       <p>
         Provides the current string version of the regex 
         that will be formatted into a standard regex with 
-        the <APICodeLink sectionID="construct" /> method.
+        the <OpenTabsAPICodeLink sectionID="construct" /> method.
       </p>
       <p>
         The text property is exposed for use in composing 
-        RXP constructors, but <APICodeLink sectionID="construct" />
+        RXP constructors, but <OpenTabsAPICodeLink sectionID="construct" />
          should be used when actually formatting the regex. 
       </p>
     </div>
@@ -68,7 +81,7 @@ sample.or("this", "that").construct()
     description:
       <p>Transforms the RXP constructor into a standard regex, 
         while correctly reconstructing 
-        <APICodeLink sectionID="isVariable" overWrite="variables"/>. 
+        <OpenTabsAPICodeLink sectionID="isVariable" overWrite="variables"/>. 
         Regex flags can be specified as arguments passed to the function.
       </p>,
     codeSample: `sample.construct()
@@ -101,14 +114,14 @@ const step1Data: APIKeyData[] = [
   {
     key: "occursOnceOrMore",
     description:
-      <p>Marks the search text as occuring one or more times, one after another. A lazy search is used by default but can be converted to a greedy search with the follow-up <APICodeLink sectionID="isGreedy" overWrite=".and.isGreedy"/> method.</p>,
+      <p>Marks the search text as occuring one or more times, one after another. A lazy search is used by default but can be converted to a greedy search with the follow-up <OpenTabsAPICodeLink sectionID="isGreedy" overWrite=".and.isGreedy"/> method.</p>,
     codeSample: `sample.occursOnceOrMore.construct() 
 //  result: /(?:sample)+?/`
   },
   {
     key: "occursZeroOrMore",
     description:
-      <p>Marks the search text as occuring zero or more times, one after another. A lazy search is used by default but can be converted to a greedy search with the follow-up <APICodeLink sectionID="isGreedy" overWrite=".and.isGreedy"/> method.</p>,
+      <p>Marks the search text as occuring zero or more times, one after another. A lazy search is used by default but can be converted to a greedy search with the follow-up <OpenTabsAPICodeLink sectionID="isGreedy" overWrite=".and.isGreedy"/> method.</p>,
     codeSample: `sample.occursZeroOrMore.construct() 
 //  result: /(?:sample)*?/`
   },
@@ -129,7 +142,7 @@ const step1Data: APIKeyData[] = [
   {
     key: "isGreedy",
     description:
-      <p>Modifies previous search marker to use a greedy search. Can be applied after using either the <APICodeLink sectionID="occursOnceOrMore" /> or <APICodeLink sectionID="occursZeroOrMore" /> constructor methods, or after the <APICodeLink sectionID="oneOrMore" /> or <APICodeLink sectionID="zeroOrMore" /> shorthands.</p>,
+      <p>Modifies previous search marker to use a greedy search. Can be applied after using either the <OpenTabsAPICodeLink sectionID="occursOnceOrMore" /> or <OpenTabsAPICodeLink sectionID="occursZeroOrMore" /> constructor methods, or after the <OpenTabsAPICodeLink sectionID="oneOrMore" /> or <OpenTabsAPICodeLink sectionID="zeroOrMore" /> shorthands.</p>,
     codeSample: `sample.occursOnceOrMore.and.isGreedy.construct() 
 //  result: /(?:sample)+/`
   }
@@ -205,7 +218,7 @@ const step4Data: APIKeyData[] = [
         This variable can then be used multiple times in a new 
         RXP constructor.</p> 
       <p>RXP will parse the variables when the 
-        <APICodeLink sectionID="construct" /> method 
+        <OpenTabsAPICodeLink sectionID="construct" /> method 
         is called and reconfigure them based on the order of usage so 
         that they will work as expected.
       </p>
@@ -300,7 +313,7 @@ const shorthandsData: APIKeyData[] = [
   {
     key: "either",
     description:
-      <p>Accepts two or more arguments that will be searched as alternate options. Equivalent to <APICodeLink sectionID="or" overWrite='init("sample").or("other")'/>.</p>,
+      <p>Accepts two or more arguments that will be searched as alternate options. Equivalent to <OpenTabsAPICodeLink sectionID="or" overWrite='init("sample").or("other")'/>.</p>,
     codeSample: `either("north", "south").construct() 
 //  result: /(?:(?:north)|(?:south))/
 
@@ -311,21 +324,21 @@ either(...directions).construct()
   {
     key: "optional",
     description:
-      <p>Marks text as optional. Equivalent to <APICodeLink sectionID="isOptional" overWrite='init("sample").isOptional' />.</p>,
+      <p>Marks text as optional. Equivalent to <OpenTabsAPICodeLink sectionID="isOptional" overWrite='init("sample").isOptional' />.</p>,
     codeSample: `optional("maybe").construct() 
 //  result: /(?:maybe)?/`
   },
   {
     key: "oneOrMore",
     description:
-      <p>Marks search text as occuring once or more. Equivalent to <APICodeLink sectionID="occursOnceOrMore" overWrite='init("sample").occursOnceOrMore'/>.</p>,
+      <p>Marks search text as occuring once or more. Equivalent to <OpenTabsAPICodeLink sectionID="occursOnceOrMore" overWrite='init("sample").occursOnceOrMore'/>.</p>,
     codeSample: `oneOrMore("sample").construct() 
 //  result: /(?:sample)+?/`
   },
   {
     key: "zeroOrMore",
     description:
-      <p>Marks search text as occuring zero or more times. Equivalent to <APICodeLink sectionID="occursZeroOrMore" overWrite='init("sample").occursZeroOrMore' />.</p>,
+      <p>Marks search text as occuring zero or more times. Equivalent to <OpenTabsAPICodeLink sectionID="occursZeroOrMore" overWrite='init("sample").occursZeroOrMore' />.</p>,
     codeSample: `zeroOrMore("sample").construct() 
 //  result: /(?:sample)*?/`
   },
@@ -341,7 +354,7 @@ withBrackets("sample").construct()
     key: "withBoundaries",
     description:
       <p>
-        Provides an <APICodeLink sectionID="init" />-style 
+        Provides an <OpenTabsAPICodeLink sectionID="init" />-style 
         function that automatically surrounds the search text 
         with <RegexCodeLink sectionID="word-boundary" overWrite="\b"/> 
         boundary markers</p>,

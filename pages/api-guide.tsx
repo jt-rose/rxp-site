@@ -4,105 +4,150 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { APIKeyData, APIData } from "../utils/APIData";
 import { CodeSample } from "../components/CodeSample";
+import { useOpenTabsContext, OpenTabsProvider } from "../context/OpenTabsContext";
 import theme from "../styles/theme";
 
-import { FaSortDown } from "react-icons/fa";
+import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
+
+
 
 const backgroundColor = theme.colors.background;
 const backgroundHover = theme.colors.backgroundHover;
 
 const {
+  RXPUnitData,
   step1Data,
   step2Data,
   step3Data,
   step4Data,
+  presetsData,
+  shorthandsData
 } = APIData;
 
-const MethodSectionDivider = (props: {title: string}) => (
-  <div className="outer">
-    <div className="inner">
-    <p>{props.title}</p>
-  </div>
-    <style jsx>{`
-    .outer {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    .inner {
-      width: 300px;
-      display: flex;
-      justify-content: center;
-      background: linear-gradient(180deg, 
-      rgba(0,0,0,0) calc(50% - 1px), 
-      rgba(192,192,192,1) calc(50%), 
-      rgba(0,0,0,0) calc(50% + 1px)
-      );
-    }
-    p {
-      margin: auto;
-      padding: 0 1em;
-      background-color: #fff;
-    }
-    `}</style>
-  </div>
-);
+const SubSectionDivider = (props: {title: string, subSectionKeys: string[]}) => {
+  const { title, subSectionKeys } = props;
+  const { openTabs, addTabs, removeTabs } = useOpenTabsContext();
+  const allKeysOpen = subSectionKeys.every(key => openTabs.includes(key));
+
+  return (
+    <div className="outer">
+      <div 
+        className="inner"
+        onClick={allKeysOpen ? 
+          () => removeTabs(subSectionKeys) 
+          : () => addTabs(subSectionKeys)}
+      >
+      <p>{title}</p>
+    </div>
+      <style jsx>{`
+      .outer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .outer:hover {
+
+      }
+      .inner {
+        width: 300px;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(180deg, 
+        rgba(0,0,0,0) calc(50% - 1px), 
+        rgba(192,192,192,1) calc(50%), 
+        rgba(0,0,0,0) calc(50% + 1px)
+        );
+        cursor: pointer;
+      }
+      .inner:hover {
+        background: linear-gradient(180deg, 
+          rgba(0,0,0,0) calc(50% - 1px), 
+          ${theme.colors.background} calc(50%), 
+          rgba(0,0,0,0) calc(50% + 1px)
+          );
+        color: ${theme.colors.background};
+      }
+      p {
+        margin: auto;
+        padding: 0 1em;
+        background-color: #fff;
+      }
+      `}</style>
+    </div>
+  );
+}
 
 interface APISection {
   title: string;
   content: APIKeyData[];
-  subHeaders: false;
+  withSubHeaders: false;
+  sectionKeys: string[]
 }
 
 interface SubHeaderData {
   subHeader: string; 
-  content: APIKeyData[];
+  subHeaderContent: APIKeyData[];
+  subHeaderKeys: string[];
 }
 
 interface APISectionWithHeaders {
   title: string;
   content: SubHeaderData[];
-  subHeaders: true;
+  withSubHeaders: true;
+  sectionKeys: string[]
 }
 
 
 const APIGuideSections: (APISection | APISectionWithHeaders)[] = [
   {
     title: "RXP Constructor",
-    content: APIData.RXPUnitData,
-    subHeaders: false
+    content: RXPUnitData,
+    withSubHeaders: false,
+    sectionKeys: RXPUnitData.map(data => data.key)
   },
   {
     title: "RXP Methods",
     content: [
       {
         subHeader: "Set Frequency",
-        content: step1Data
+        subHeaderContent: step1Data,
+        subHeaderKeys: step1Data.map(data => data.key)
       },
       {
         subHeader: "Set Surroundings",
-        content: step2Data
+        subHeaderContent: step2Data,
+        subHeaderKeys: step2Data.map(data => data.key)
       },
       {
         subHeader: "Set Positioning",
-        content: step3Data
+        subHeaderContent: step3Data,
+        subHeaderKeys: step3Data.map(data => data.key)
       },
       {
         subHeader: "Set Options",
-        content: step4Data
+        subHeaderContent: step4Data,
+        subHeaderKeys: step4Data.map(data => data.key)
       }
     ],
-    subHeaders: true
+    withSubHeaders: true,
+    sectionKeys: [
+      ...step1Data,
+      ...step2Data,
+      ...step3Data,
+      ...step4Data
+    ].map(data => data.key)
   },
   {
     title: "Presets",
-    content: APIData.presetsData,
-    subHeaders: false
+    content: presetsData,
+    withSubHeaders: false,
+    sectionKeys: presetsData.map(data => data.key)
   },
   {
     title: "Shorthands",
-    content: APIData.shorthandsData,
-    subHeaders: false
+    content: shorthandsData,
+    withSubHeaders: false,
+    sectionKeys: shorthandsData.map(data => data.key)
   },
 ];
 
@@ -110,10 +155,11 @@ const topBorderRadius = ".5em .5em 0 0";
 const bottomBorderRadius = "0 0 .5em .5em";
 
 const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, lastChild: boolean }) => {
-  const routeQuery = useRouter().asPath.replace("/api-guide#", "");
   const { APIKeyInfo, firstChild, lastChild } = props;
-  const defaultOpen = routeQuery === APIKeyInfo.key;
-  const [isOpen, toggleOpen] = useState(defaultOpen);
+  const { openTabs, addTabs, removeTabs } = useOpenTabsContext();
+  const isOpen = openTabs.includes(props.APIKeyInfo.key);
+  const toggleOpen = isOpen ? () => removeTabs([props.APIKeyInfo.key]) : () => addTabs([props.APIKeyInfo.key])
+  
   const [isHovered, toggleHover] = useState(false);
   const borderRadius = firstChild ? topBorderRadius : lastChild && !(isOpen) ? bottomBorderRadius : "0";
 
@@ -123,7 +169,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
       onMouseEnter={() => toggleHover(true)}
       onMouseLeave={() => toggleHover(false)}
       >
-      <button onClick={() => toggleOpen(!isOpen)}>{APIKeyInfo.key}</button>
+      <button onClick={() => toggleOpen()}>{APIKeyInfo.key}</button>
       <div className="accordion-panel-content">
         {APIKeyInfo.description}
         <br />
@@ -161,7 +207,7 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
   );
 };
 
-const AccordionPanelGroup = (props: {APIKeys: APIKeyData[], showPanels: boolean}) => (
+const AccordionPanelGroup = (props: {APIKeys: APIKeyData[] }) => (
   <ul>
           {props.APIKeys.map((x, i) => (
             <AccordionPanel APIKeyInfo={x} 
@@ -175,32 +221,36 @@ const AccordionPanelGroup = (props: {APIKeys: APIKeyData[], showPanels: boolean}
             padding: 0;
             list-style: none;
           }
-          ul {
-            display: ${props.showPanels ? "block" : "none"}
-          }
           `}</style>
         </ul>
 );
 
 const AccordionSection = (props: { section: APISection | APISectionWithHeaders, lastSection: boolean }) => {
-  const [showPanels, togglePanels] = useState(true); 
-  const {section} = props; 
+  const { section } = props;
+  const { title, sectionKeys } = section; 
+  const { openTabs, addTabs, removeTabs } = useOpenTabsContext();
+  const openAllSectionTabs = () => addTabs(sectionKeys);
+  const closeAllSectionTabs = () => removeTabs(sectionKeys)
+  const allKeysOpen = sectionKeys.every(key => openTabs.includes(key));
 
   return (
-    <section key={`section-${section.title}`} id={section.title.toLowerCase().replace(" ", "-")} className="api-section sticky-header-adjust">
+    <section key={`section-${title}`} id={title.toLowerCase().replace(" ", "-")} className="api-section sticky-header-adjust">
       <div className="section-title-container">
-      <div className="section-title" onClick={() => togglePanels(!showPanels)}>
-        <FaSortDown style={{color: "#fff"}} />
-          <h2>{section.title}</h2>
-          <FaSortDown style={{transform: `${showPanels ? "none" : "rotate(180deg)"}`, paddingBottom: `${showPanels ? "5px" : "none"}`}}/>
+      <div className="section-title" >
+        <FaPlusSquare style={{color: "#fff"}} />
+          <h2 onClick={allKeysOpen ? () => closeAllSectionTabs() : () => openAllSectionTabs()}>
+            { title }
+          </h2>
+          {allKeysOpen ? <FaMinusSquare /> : <FaPlusSquare />}
+          {/*<FaPlusSquare style={{transform: `${allKeysOpen ? "rotate(180deg)" : "none" }`, paddingBottom: `${allKeysOpen ? "none" : "5px"}`}}/>*/}
       </div>
       </div>
-        {section.subHeaders ? section.content.map(keys => (
-            <div key={`subHeader-section-${keys.subHeader}`}>
-              <MethodSectionDivider title={keys.subHeader}/>
-              <AccordionPanelGroup APIKeys={keys.content} showPanels={showPanels}/>
+        {section.withSubHeaders ? section.content.map(subSection => (
+            <div key={`subHeader-section-${subSection.subHeader}`}>
+              <SubSectionDivider title={subSection.subHeader} subSectionKeys={subSection.subHeaderKeys}/>
+              <AccordionPanelGroup APIKeys={subSection.subHeaderContent} />
             </div>
-          )) : (<AccordionPanelGroup APIKeys={section.content} showPanels={showPanels}/>)}
+          )) : (<AccordionPanelGroup APIKeys={section.content} />)}
         <style jsx>{`
           .api-section {
             padding-left: 2em;
@@ -219,30 +269,41 @@ const AccordionSection = (props: { section: APISection | APISectionWithHeaders, 
           }
           h2 {
             margin: 0;
+            cursor: pointer;
+          }
+          h2:hover {
+            color: ${theme.colors.background};
           }
         `}</style>
       </section>
   )
 }
 
-const APIGuide = () => (
-  <div>
-    {APIGuideSections.map((section, i) => (
-      <AccordionSection 
-        section={section} 
-        key={`${section.title}-key`}
-        lastSection={APIGuideSections.length === (i + 1)}  
-      />
-    ))}
-  </div>
-);
-
-const APIPage = () => {
+const APIGuide = () => {
   
 
   return (
+    <div>
+      {APIGuideSections.map((section, i) => (
+        <AccordionSection 
+          section={section} 
+          key={`${section.title}-key`}
+          lastSection={APIGuideSections.length === (i + 1)}  
+        />
+      ))}
+    </div>
+  );
+}
+
+// change arrow to hover, open individual section
+const APIPage = () => {
+  const routeQuery = useRouter().asPath.replace("/api-guide#", "");
+
+  return (
     <Layout title="API Guide" pageTitle="API Guide" sizing="modest">
-      <APIGuide />
+      <OpenTabsProvider defaultOpen={routeQuery}>
+        <APIGuide />
+      </OpenTabsProvider>
     </Layout>
   );
 }

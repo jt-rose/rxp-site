@@ -1,48 +1,36 @@
 import Layout from "../components/Layout";
-import { useState, useEffect } from "react"
-import { SiCodesandbox } from "react-icons/si"
-import theme from "../styles/theme";
 
 const PlaygroundPage = () => {
-  const [screenWidth, setWidth] = useState(700);
-  useEffect(() => {
-    setWidth(window.innerWidth);
-  });
   return (
     <Layout title="Playground" pageTitle="RXP Playground" sizing="large">
       <h3>
         Using the embedded playground below, you can directly test out RXP code, courtesy of 
-         <span>
-          <SiCodesandbox /> <a href="https://codesandbox.io">CodeSandbox</a>
-        </span>
+        <a href="https://www.stackblitz.com">
+          <img src="https://developer.stackblitz.com/img/logo_dark.svg" />
+        </a>
       </h3>
+      
       <div className="playground-container">
-        <iframe src={`https://codesandbox.io/embed/rxp-sample-ks16u?fontsize=14&hidenavigation=1&runonclick=1&module=%2Fsrc%2FRXP-Sample.js&theme=dark&view=${screenWidth < 700 ? "preview" : "split"}`}
-       title="RXP-Sample"
-       allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-  />
+      <iframe 
+        src="https://stackblitz.com/edit/rxp-sample?ctl=1&embed=1&file=RXP-sample.ts&hideExplorer=1&hideNavigation=1"
+      />
       </div>
   <style jsx>{`
   h3 {
     text-align: center;
   }
-  span {
-    background-color: ${theme.colors.background};
-    color: #fff;
-    border-radius: 1em;
-    padding: .3em .5em;
-    margin: 0 .3em;
+  img {
+    height: 24px;
+    background-color: #4d4d4d;
+    padding: .1em .4em;
+    margin-left: .3em;
+    margin-bottom: -.3em;
+    border-radius: 6px;
   }
-  span:hover {
-    background-color: ${theme.colors.backgroundHover};
+  img:hover {
+    background-color: #333;
   }
-  a {
-    text-decoration: none;
-  }
-  a:visited {
-    color: #fff;
-  }
+  
   .playground-container {
     display: flex;
     justify-content: center;

@@ -5,31 +5,7 @@ import { FaHome} from "react-icons/fa";
 
 import theme from "../styles/theme";
 
-/*
-const RXPHeader = styled.header`
-  width: 100%;
-  display: flex;
-`;
-
-const HeaderSpacing = styled.div`
-  flex-grow: 1;
-`;
-
-export const Header = () => (
-  <RXPHeader>
-    <div>RXP</div>
-    <HeaderSpacing />
-    <div>Menu</div>
-  </RXPHeader>
-);
-*/
-
 const siteLinks = [
-  /*{
-    pageTitle: "Home",
-    path: "/",
-    icon: "",
-  },*/
   {
     pageTitle: "Guide",
     path: "/guide",
@@ -106,7 +82,3 @@ export const Header = () => (
     </style>
     </nav>
 );
-// notes
-// mobile: Home...............Hamburger
-// tablet: Home......icons...
-// desktop: Home...Icons+Name....

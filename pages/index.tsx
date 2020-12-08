@@ -2,6 +2,8 @@ import Layout from "../components/Layout";
 import { RXPexamples } from "../utils/examples";
 import { CodeSample } from "../components/CodeSample";
 
+import { FaChevronCircleRight } from "react-icons/fa";
+
 const ExampleSectionDivider = () => (
       <div>
         <h2>Examples</h2>
@@ -29,6 +31,7 @@ const ExampleSectionDivider = () => (
 
 const Examples = () => (
   <ul>
+    <ExampleSectionDivider />
       {RXPexamples.map(example => (
           <li key={`example-${example.title}`}>
               <h3>{example.title}</h3>
@@ -60,10 +63,10 @@ const Examples = () => (
 const IndexPage = () => (
   <Layout title="Home" pageTitle="RXP">
     <div className="rxp-intro">
-      <p>A descriptive constructor for regular expressions</p>
+      <p><b>A descriptive constructor for regular expressions</b></p>
       <p>
         RXP is a small library that provides a constructor for regular
-        expressions, providing the following benefits:
+        expressions, providing the following benefits
       </p>
     </div>
     
@@ -91,17 +94,19 @@ const IndexPage = () => (
       },
     ].map((x) => (
       <li key={`${x.title}-key`}>
-        <h3>{x.title}</h3>
+        <h3><FaChevronCircleRight style={{marginRight: "1em"}}/>{x.title}</h3>
         <p>{x.content}</p>
       </li>
     ))}
     </ul>
-    <ExampleSectionDivider />
     <Examples />
     <style jsx>{`
       .rxp-intro {
         text-align: center;
         margin-bottom: 2em;
+      }
+      .rxp-intro p {
+        margin-top: 0;
       }
       p {
         padding: 0 2em;
@@ -111,6 +116,10 @@ const IndexPage = () => (
       }
       li p {
         padding: 0 1em 1em 1em;
+      }
+      li h3 {
+        display: flex;
+        align-items: center;
       }
       .site-badges {
         display: flex;

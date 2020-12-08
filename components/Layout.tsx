@@ -65,7 +65,7 @@ const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Pro
     <img src={`https://badgen.net/badge/icon/v1.4.5?icon=npm&label&scale=${badgeSize}&color=${formattedThemeBKG}`} alt="NPM"/>
     </a>
     <a href="https://www.typescriptlang.org/">
-    <img src={`https://badgen.net/badge/icon/TypeScript?icon=typescript&label&scale=${badgeSize}&color=${formattedThemeBKG}`} alt="TypeScript" />
+    <img src={`https://badgen.net/badge/icon/typescript?icon=typescript&label&scale=${badgeSize}&color=${formattedThemeBKG}`} alt="TypeScript" />
     </a>
     </div>
       <main>

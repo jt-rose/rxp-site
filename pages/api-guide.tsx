@@ -45,9 +45,6 @@ const SubSectionDivider = (props: {title: string, subSectionKeys: string[]}) => 
         display: flex;
         justify-content: center;
       }
-      .outer:hover {
-
-      }
       .inner {
         width: 300px;
         display: flex;

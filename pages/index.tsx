@@ -2,6 +2,31 @@ import Layout from "../components/Layout";
 import { RXPexamples } from "../utils/examples";
 import { CodeSample } from "../components/CodeSample";
 
+const ExampleSectionDivider = () => (
+      <div>
+        <h2>Examples</h2>
+      <style jsx>{`
+      div {
+        width: 80%;
+        margin: auto;
+        margin-top: 3em;
+        display: flex;
+        justify-content: center;
+        background: linear-gradient(180deg, 
+        rgba(0,0,0,0) calc(50% - 1px), 
+        rgba(192,192,192,1) calc(50%), 
+        rgba(0,0,0,0) calc(50% + 1px)
+        );
+      }
+      h2 {
+        margin: auto;
+        padding: 0 1em;
+        background-color: #fff;
+      }
+      `}</style>
+    </div>
+  );
+
 const Examples = () => (
   <ul>
       {RXPexamples.map(example => (
@@ -15,19 +40,34 @@ const Examples = () => (
           ul {
               list-style-type: none;
           }
+          h3, p {
+            text-align: center;
+          }
+          h3 {
+            margin-top: 1em;
+            margin-bottom: 0;
+          }
+          p {
+            margin-top: 0;
+          }
+          li {
+            margin-bottom: 2.5em;
+          }
       `}</style>
   </ul>
 );
 
 const IndexPage = () => (
   <Layout title="Home" pageTitle="RXP">
+    <div className="rxp-intro">
+      <p>A descriptive constructor for regular expressions</p>
+      <p>
+        RXP is a small library that provides a constructor for regular
+        expressions, providing the following benefits:
+      </p>
+    </div>
     
-    <p>A descriptive constructor for regular expressions</p>
-
-    <p>
-      RXP is a small library that provides a constructor for regular
-      expressions, providing the following benefits:
-    </p>
+    <ul>
     {[
       {
         title: "Plain English Descriptions",
@@ -55,8 +95,17 @@ const IndexPage = () => (
         <p>{x.content}</p>
       </li>
     ))}
+    </ul>
+    <ExampleSectionDivider />
     <Examples />
     <style jsx>{`
+      .rxp-intro {
+        text-align: center;
+        margin-bottom: 2em;
+      }
+      p {
+        padding: 0 2em;
+      }
       li {
         list-style-type: none;
       }

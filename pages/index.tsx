@@ -3,6 +3,7 @@ import { RXPexamples } from "../utils/examples";
 import { CodeSample } from "../components/CodeSample";
 
 import { FaChevronCircleRight } from "react-icons/fa";
+import theme from "../styles/theme";
 
 const ExampleSectionDivider = () => (
       <div>
@@ -74,7 +75,7 @@ const IndexPage = () => (
     {[
       {
         title: "Plain English Descriptions",
-        content: "Replace cryptic regex with intuitive descriptions",
+        content: <>Replace cryptic regex with intuitive descriptions inspired by the <a href="https://mochajs.org/" className="link-styling">Mocha</a> / <a href="https://www.chaijs.com/" className="link-styling">Chai</a> syntax</>,
       },
       {
         title: "Modular and Composable Regex Components",
@@ -95,7 +96,7 @@ const IndexPage = () => (
     ].map((x) => (
       <li key={`${x.title}-key`}>
         <h3 className="nunito-font"><FaChevronCircleRight style={{marginRight: "1em"}}/>{x.title}</h3>
-        <p>{x.content}</p>
+        {x.content}
       </li>
     ))}
     </ul>

@@ -28,7 +28,7 @@ const RXPUnitData: APIKeyData[] = [
         <p>
         Creates a new RXP constructor from string, regex, 
         or other RXP constructors passed as arguments. Provides a 
-        variety of methods to apply regex behavior before being 
+        variety of methods to apply regex search conditions before being 
         converted to a standard regex with the 
         <OpenTabsAPICodeLink sectionID="construct" /> method.
         </p>
@@ -96,7 +96,7 @@ sample.construct("global", "i", "s")
   {
     key: "and",
     description:
-      <p>Extends an RXP behavior method to apply additional behaviors</p>,
+      <p>Extends an RXP method to apply additional search conditions</p>,
     codeSample: `init("sample").occurs(3).and.atStart.construct() 
 //  result: /^(?:(?:sample){3})/`
   },

@@ -25,7 +25,7 @@ const guideSectionLinks: TableOfContentsData[] = [
     hrefID: "init-guide"
   },
   {
-    title: "Modify Search Behavior",
+    title: "Modify Search Conditions",
     hrefID: "modify-text-guide"
   },
   {
@@ -61,6 +61,7 @@ const TableOfContents = () => (
     div {
       display: flex;
       justify-content: center;
+      margin-bottom: 1.5em;
     }
     ul {
       margin: 0;
@@ -99,7 +100,7 @@ yarn add rxp`} />
 const { init, optional, either } = RXP;`} />
 <p>If you want to install specific functions directly, you can specify them in the import:</p>
 <CodeSample sample={`import { init, optional, either } from "rxp"`} />
-<p>Alternatively, you can bypass importing the library altogether and just use the live code editor on the <Link href="/playground"><a>playground</a></Link> page to construct a regex and then copy it directly into your application</p>
+<p>Alternatively, you can bypass importing the library altogether and just use the live code editor on the <Link href="/playground"><a className="link-styling">playground</a></Link> page to construct a regex and then copy it directly into your application</p>
   </GuideSection>
 )
 
@@ -112,7 +113,7 @@ const InitGuide = () => (
       Initialize the Constructor
     </h2>
     <p>The RXP <APICodeLink sectionID="init" /> function works by accepting text to search for, creating an object 
-      that provides methods to modify the search behavior, and then converts it to a 
+      with methods to modify the search conditions, and then converts it to a 
       standard regex through the <APICodeLink sectionID="construct" /> command.</p>
 
       <CodeSample sample={`init("sample").construct() // 	/sample/
@@ -132,7 +133,7 @@ init("test ", /out /, sample).construct() // /test out sample/`} />
       <p>
         Once the search text has been specified with <APICodeLink sectionID="init" />,
         alternative text can be specified with <APICodeLink sectionID="or" />. 
-        Any behavior methods used after <APICodeLink sectionID="or" /> will then be applied to both options:
+        Any RXP methods used after <APICodeLink sectionID="or" /> will then be applied to both options:
       </p>
       <CodeSample sample={`const thisOrThat = init("this").or("that")
 thisOrThat.construct()
@@ -156,24 +157,23 @@ const patternsAndPatternsOhMy = init(
 
 const ModifyTextGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust nunito-font" id="modify-text-guide">Modify Regex Behavior</h2>
+    <h2 className="section-title sticky-header-adjust nunito-font" id="modify-text-guide">Modify Search Conditions</h2>
       <p>
       After creating the RXP constructor object, 
-      the provided text can be modified with regex behavior:
+      the provided text can be modified with regex search conditions:
       </p>
       <CodeSample sample={`sample.occurs(2).construct() // /(?:sample){2}/ 
-sample.or("other").construct() // /(?:sample)|(?:other)/ 
 sample.precededBy("ID: ").construct() // /(?<=ID: )sample/
 sample.atStart.construct() // /^(?:sample)/ 
 sample.isOptional.construct() // /(?:sample)?/`} />
       <p>
       There are a large number of modifiers available to give full 
-      coverage to regex behavior. You can review these individually 
-      on the <Link href="/api-guide#rxp-method"><a>API page</a></Link>.
+      coverage to regex search conditions. You can review these individually 
+      on the <Link href="/api-guide#rxp-method"><a className="link-styling">API page</a></Link>.
       </p>
       <p>
       By default, groups are noncapturing and searches are lazy, 
-      but both behaviors can be overridden:
+      but both settings can be overridden:
       </p>
       <CodeSample sample={`sample.isCaptured.construct() // /(sample)/ 
 sample.occursOnceOrMore.construct() // /(?:sample)+?/ 
@@ -228,7 +228,7 @@ init("\\d").construct // result: /\\\\d/
 // correct:
 init(/\\d/).construct() // result: /\\d/`} />
       <p>
-      A full list of presets can be found on the <Link href="/api-guide#presets"><a>API page</a></Link>
+      A full list of presets can be found on the <Link href="/api-guide#presets"><a className="link-styling">API page</a></Link>
       </p>
   </GuideSection>
 );
@@ -238,7 +238,7 @@ const ShorthandsGuide = () => (
     <h2 className="section-title sticky-header-adjust nunito-font" id="shorthands-guide">Shorthands</h2>
       <p>
       <APICodeLink sectionID="shorthands" /> are a group of functions that create an RXP object and 
-      immediately apply a desired search behavior. These are provided 
+      immediately apply a desired search condition. These are provided 
       to improve readability, and there is no functional difference 
       between something like <APICodeLink sectionID="optional" overWrite='optional("text")'/> and <APICodeLink sectionID="isOptional" overWrite='init("text").isOptional'/>.
       </p>
@@ -248,7 +248,7 @@ const ShorthandsGuide = () => (
     optional(")")
   .construct() // /(?:\()?text(?:\))?/`} />
       <p>
-      A variety of shorthands are available and can be found on the <Link href="/api-guide#shorthands"><a>API page</a></Link>. 
+      A variety of shorthands are available and can be found on the <Link href="/api-guide#shorthands"><a className="link-styling">API page</a></Link>. 
       All of these produce the standard RXP constructor object with the unique 
       exceptions of <APICodeLink sectionID="withBoundaries" /> and <APICodeLink sectionID="wrapRXP" />.
       </p>
@@ -259,15 +259,15 @@ const ErrorHandlingGuide = () => (
   <GuideSection>
     <h2 className="section-title sticky-header-adjust nunito-font" id="error-handling-guide">Error Handling</h2>
     <p>RXP has been designed with a degree of error handling built in. 
-      When combining two behaviors with <APICodeLink sectionID="and" /> would result in an invalid regex, the constructor
-      will not make the subsequent option available, allowing only valid behavior combinations.
+      When combining two search conditions with <APICodeLink sectionID="and" /> would result in an invalid regex, the constructor
+      will not make the subsequent option available, allowing only valid combinations.
     </p>
     <p>This is designed to be intuitive for the user thanks to intellisense, 
     and is not something you should have to think about. The options presented will 
     naturally guide you into creating valid regex.
   </p>
     <p>
-    The actual behaviors are structured into levels, with each one locking out previous levels:
+    The actual search conditions are structured into levels, with each one locking out previous levels:
     </p>
     <ol>
       <li><APICodeLink sectionID="occurs" />, <APICodeLink sectionID="occursAtLeast" />, etc.  </li>

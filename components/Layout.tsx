@@ -145,13 +145,22 @@ const Layout = ({ children, pageTitle, title, sizing = "standard" }: Props) => (
         .nunito-font {
           font-family: Nunito, sans-serif;
         }
+        .link-styling {
+          text-decoration: none;
+          color: ${theme.colors.background};
+          font-weight: bold;
+        }
+        .link-styling:hover {
+          text-decoration: underline;
+        }
         .guide-section {
           display: flex;
           flex-direction: column;
-          padding: 1em 1em 1em 0;
+          padding: 1em 1em 1.5em 0;
         }
         .section-title {
           text-align: center;
+          margin-bottom: 0;
         }
         .sticky-header-adjust {
           padding-top: 60px; 

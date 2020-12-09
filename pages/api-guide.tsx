@@ -32,7 +32,7 @@ const SubSectionDivider = (props: {title: string, subSectionKeys: string[]}) => 
   return (
     <div className="outer">
       <div 
-        className="inner"
+        className="inner nunito-font"
         onClick={allKeysOpen ? 
           () => removeTabs(subSectionKeys) 
           : () => addTabs(subSectionKeys)}
@@ -238,6 +238,7 @@ const AccordionSection = (props: { section: APISection | APISectionWithHeaders, 
       <div className="section-title" >
         <FaPlusSquare style={{color: "#fff"}} />
           <h2 
+            className="nunito-font"
             onClick={allKeysOpen ? () => closeAllSectionTabs() : () => openAllSectionTabs()}
             onMouseEnter={() => toggleHover(true)}
             onMouseLeave={() => toggleHover(false)}
@@ -260,7 +261,6 @@ const AccordionSection = (props: { section: APISection | APISectionWithHeaders, 
                 onMouseLeave={() => toggleHover(false)}
               />
               </span>}
-          {/*<FaPlusSquare style={{transform: `${allKeysOpen ? "rotate(180deg)" : "none" }`, paddingBottom: `${allKeysOpen ? "none" : "5px"}`}}/>*/}
       </div>
       </div>
         {section.withSubHeaders ? section.content.map(subSection => (

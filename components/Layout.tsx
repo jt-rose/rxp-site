@@ -1,5 +1,5 @@
 import React, { useState, ReactNode } from "react";
-import Head from "next/head";
+import { Head } from "./Head";
 import theme from "../styles/theme";
 import { Header } from "./Header";
 
@@ -29,8 +29,8 @@ const badgeSize = "1.1";
 
 type Props = {
   children?: ReactNode;
-  title?: string;
-  pageTitle?: string;
+  title: string;
+  pageTitle: string;
   sizing?: "standard" | "narrow" | "modest" | "large";
 };
 
@@ -47,14 +47,10 @@ const getLayoutSizing = (sizing: "standard" | "narrow" | "modest" | "large") => 
   }
 };
 
-const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Props) => (
+const Layout = ({ children, pageTitle, title, sizing = "standard" }: Props) => (
   <div className="site-container">
     
-    <Head>
-      <title>{`RXP | ${title}`}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
+    <Head title={title}/>
     <Header />
     <div className="site-content">
     <div className="site-badges">
@@ -69,7 +65,7 @@ const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Pro
     </a>
     </div>
       <main>
-        <h1>{pageTitle}</h1>
+        <h1 className="nunito-font">{pageTitle}</h1>
     {children}
     </main>
 
@@ -138,13 +134,16 @@ const Layout = ({ children, pageTitle = "RXP", title, sizing = "standard" }: Pro
     `}</style>
     <style jsx global>{`
         html, body {
+          font-family: Roboto, sans-serif;
           margin: 0;
           padding: 0;
           font-size: 18px;
           font-weight: 400;
           line-height: 1.8;
           color: #333;
-          font-family: sans-serif;
+        }
+        .nunito-font {
+          font-family: Nunito, sans-serif;
         }
         .guide-section {
           display: flex;

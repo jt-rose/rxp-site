@@ -86,7 +86,11 @@ const TableOfContents = () => (
 
 const ImportGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust" id="import-guide">Import the Library</h2>
+    <h2 
+      className="section-title sticky-header-adjust nunito-font" 
+      id="import-guide">
+        Import the Library
+    </h2>
     <p>RXP can be installed directly through NPM / Yarn:</p>
     <CodeSample sample={`npm i rxp
 yarn add rxp`} />
@@ -101,7 +105,12 @@ const { init, optional, either } = RXP;`} />
 
 const InitGuide = () => (
   <GuideSection>
-  <h2 className="section-title sticky-header-adjust" id="init-guide">Initialize the Constructor</h2>
+  <h2 
+    className="section-title sticky-header-adjust nunito-font" 
+    id="init-guide"
+    >
+      Initialize the Constructor
+    </h2>
     <p>The RXP <APICodeLink sectionID="init" /> function works by accepting text to search for, creating an object 
       that provides methods to modify the search behavior, and then converts it to a 
       standard regex through the <APICodeLink sectionID="construct" /> command.</p>
@@ -147,7 +156,7 @@ const patternsAndPatternsOhMy = init(
 
 const ModifyTextGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust" id="modify-text-guide">Modify Regex Behavior</h2>
+    <h2 className="section-title sticky-header-adjust nunito-font" id="modify-text-guide">Modify Regex Behavior</h2>
       <p>
       After creating the RXP constructor object, 
       the provided text can be modified with regex behavior:
@@ -183,7 +192,7 @@ init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}
 
 const ConstructGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust" id="construct-guide">Convert to Regex</h2>
+    <h2 className="section-title sticky-header-adjust nunito-font" id="construct-guide">Convert to Regex</h2>
       <p>
       The <APICodeLink sectionID="construct" /> function can be passed arguments to define the search flags:
       </p>
@@ -199,7 +208,7 @@ sample.construct("global", "s", "I") // /sample/gsi`} />
 
 const PresetsGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust" id="presets-guide">Presets</h2>
+    <h2 className="section-title sticky-header-adjust nunito-font" id="presets-guide">Presets</h2>
       <p>
       To use special characters, such as <RegexCodeLink sectionID="any-digit" overWrite="\d"/> to match a digit or <RegexCodeLink sectionID="any-letter" overWrite="\w"/> to 
       match a letter, you can use the <APICodeLink sectionID="presets" /> provided with RXP, such 
@@ -226,7 +235,7 @@ init(/\\d/).construct() // result: /\\d/`} />
 
 const ShorthandsGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust" id="shorthands-guide">Shorthands</h2>
+    <h2 className="section-title sticky-header-adjust nunito-font" id="shorthands-guide">Shorthands</h2>
       <p>
       <APICodeLink sectionID="shorthands" /> are a group of functions that create an RXP object and 
       immediately apply a desired search behavior. These are provided 
@@ -248,7 +257,7 @@ const ShorthandsGuide = () => (
 
 const ErrorHandlingGuide = () => (
   <GuideSection>
-    <h2 className="section-title sticky-header-adjust" id="error-handling-guide">Error Handling</h2>
+    <h2 className="section-title sticky-header-adjust nunito-font" id="error-handling-guide">Error Handling</h2>
     <p>RXP has been designed with a degree of error handling built in. 
       When combining two behaviors with <APICodeLink sectionID="and" /> would result in an invalid regex, the constructor
       will not make the subsequent option available, allowing only valid behavior combinations.

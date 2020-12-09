@@ -6,7 +6,7 @@ import { FaChevronCircleRight } from "react-icons/fa";
 
 const ExampleSectionDivider = () => (
       <div>
-        <h2>Examples</h2>
+        <h2 className="nunito-font">Examples</h2>
       <style jsx>{`
       div {
         width: 80%;
@@ -34,8 +34,8 @@ const Examples = () => (
     <ExampleSectionDivider />
       {RXPexamples.map(example => (
           <li key={`example-${example.title}`}>
-              <h3>{example.title}</h3>
-              <p>Target: {example.target}</p>
+              <h3 className="nunito-font">{example.title}</h3>
+              <p className="nunito-font">Target: {example.target}</p>
               <CodeSample sample={example.sample}/>
           </li>
       ))}
@@ -63,7 +63,7 @@ const Examples = () => (
 const IndexPage = () => (
   <Layout title="Home" pageTitle="RXP">
     <div className="rxp-intro">
-      <p><b>A descriptive constructor for regular expressions</b></p>
+      <p className="nunito-font"><b>A descriptive constructor for regular expressions</b></p>
       <p>
         RXP is a small library that provides a constructor for regular
         expressions, providing the following benefits
@@ -94,7 +94,7 @@ const IndexPage = () => (
       },
     ].map((x) => (
       <li key={`${x.title}-key`}>
-        <h3><FaChevronCircleRight style={{marginRight: "1em"}}/>{x.title}</h3>
+        <h3 className="nunito-font"><FaChevronCircleRight style={{marginRight: "1em"}}/>{x.title}</h3>
         <p>{x.content}</p>
       </li>
     ))}

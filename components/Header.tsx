@@ -37,7 +37,7 @@ export const Header = () => (
       </Link>
       {siteLinks.map((link) => (
         <Link href={link.path} key={`${link.pageTitle}-key`}>
-          <a>{link.pageTitle}</a>
+          <a className="nunito-font">{link.pageTitle}</a>
         </Link>
       ))}
     

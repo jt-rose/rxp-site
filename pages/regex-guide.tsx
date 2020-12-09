@@ -33,7 +33,7 @@ const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
 const RegexGuidePage = () => (
   <Layout title="Regex Guide" pageTitle="Regex Guide">
     <p>A quick reference guide to common regex characters</p>
-    <h2>Regex Behavior Modifiers</h2>
+    <h2 className="nunito-font">Regex Behavior Modifiers</h2>
     <table>
       <thead>
         <tr>
@@ -57,7 +57,7 @@ const RegexGuidePage = () => (
       </tbody>
     </table>
     <br />
-    <h2>Special Characters</h2>
+    <h2 className="nunito-font">Special Characters</h2>
     <table>
       <thead>
         <tr>

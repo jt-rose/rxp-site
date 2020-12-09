@@ -191,13 +191,16 @@ const AccordionPanel = (props: { APIKeyInfo: APIKeyData, firstChild: boolean, la
           border-radius: ${borderRadius}
         }
         .accordion-panel-content {
-          padding: 0 18px 8px;
+          padding: 0 18px 18px;
           background-color: #fff;
         }
         .accordion-panel-content {
           display: ${isOpen ? "block" : "none"};
           border: 2px solid ${isHovered ? backgroundHover : backgroundColor};
           border-radius: ${lastChild && isOpen ? bottomBorderRadius : "0"}
+        }
+        .accordion-panel-content p {
+          margin-bottom: 0;
         }
       `}</style>
     </li>

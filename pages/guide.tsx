@@ -74,9 +74,7 @@ const TableOfContents = () => (
       }
       a {
         text-decoration: none;
-      }
-      a:visited {
-        color: black;
+        color: #333;
       }
       a:hover {
         text-decoration: underline;

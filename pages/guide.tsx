@@ -97,7 +97,7 @@ const ImportGuide = () => (
 yarn add rxp`} />
     <p>Once installed, the RXP object can be imported, which contains every aspect of the library</p>
     <CodeSample sample={`import { RXP } from "rxp"
-const { init, optional, either } = RXP;`} />
+const { init, optional, either } = RXP`} />
 <p>If you want to install specific functions directly, you can specify them in the import:</p>
 <CodeSample sample={`import { init, optional, either } from "rxp"`} />
 <p>Alternatively, you can bypass importing the library altogether and just use the live code editor on the <Link href="/playground"><a className="link-styling">playground</a></Link> page to construct a regex and then copy it directly into your application</p>
@@ -145,13 +145,13 @@ thisOrThat.occurs(5).construct()
       Using this pattern, regex built through RXP become modular and composable, 
       making it easy to reuse or extend them:
       </p>
-      <CodeSample sample={`const name = init("Jeff");
+      <CodeSample sample={`const name = init("Jeff")
 const namePattern = init(name.atStart, "some stuff", name.isOptional);
 const patternsAndPatternsOhMy = init(
     namePattern, 
     namePattern, 
     namePattern.occurs(999)
-  ).construct();`} />
+  ).construct()`} />
       </GuideSection>
 );
 
@@ -185,7 +185,7 @@ sample.occursOnceOrMore.and.isGreedy.construct() // /(?:sample)+/`} />
       order of appearance to work as expected. Here is an example using the 
       preset <APICodeLink sectionID="anyDigit" /> (covered below):
       </p>
-      <CodeSample sample={`const regexVar = anyDigit.occurs(3).and.isVariable("var");
+      <CodeSample sample={`const regexVar = anyDigit.occurs(3).and.isVariable("var")
 init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}/>
       </GuideSection>
 );
@@ -223,7 +223,7 @@ anyLetter.atEnd.construct() // /(?:\\w)$/`} />
       presets then you would need to use a standard regex:
       </p>
       <CodeSample sample={`// incorrect:
-init("\\d").construct // result: /\\\\d/
+init("\\d").construct() // result: /\\\\d/
 
 // correct:
 init(/\\d/).construct() // result: /\\d/`} />
@@ -286,7 +286,7 @@ const ErrorHandlingGuide = () => (
       There is one important caveat here - when using regex or RXP constructors as arguments in <APICodeLink sectionID="init" /> or related functions,
      the resulting RXP constructor will provide all of the possible options initially,
      so it is still possible to write invalid regex:</p>
-     <CodeSample sample={`const example = init("text").precededBy("stuff");
+     <CodeSample sample={`const example = init("text").precededBy("stuff")
 example.atEnd // works
 example.atStart // X - unavailable
 

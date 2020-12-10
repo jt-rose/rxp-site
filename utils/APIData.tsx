@@ -35,7 +35,7 @@ const RXPUnitData: APIKeyData[] = [
           regex and RXP constructors are accepted as is.
         </p>
       </div>,
-    codeSample: `const sample = init("sample");
+    codeSample: `const sample = init("sample")
 sample.construct()  
 //  result: /sample/
 
@@ -353,8 +353,7 @@ withBrackets("sample").construct()
       <p>
         Provides an <OpenTabsAPICodeLink sectionID="init" />-style 
         function that automatically surrounds the search text 
-        with <RegexCodeLink sectionID="word-boundary" overWrite="\b"/> 
-        boundary markers</p>,
+        with <RegexCodeLink sectionID="word-boundary" overWrite="\b"/> boundary markers</p>,
     codeSample: `withBoundaries("sample").construct() 
 // result: /\\bsample\\b/`
   },

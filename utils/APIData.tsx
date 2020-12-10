@@ -29,8 +29,7 @@ const RXPUnitData: APIKeyData[] = [
         Creates a new RXP constructor from string, regex, 
         or other RXP constructors passed as arguments. Provides a 
         variety of methods to apply regex search conditions before being 
-        converted to a standard regex with the 
-        <OpenTabsAPICodeLink sectionID="construct" /> method.
+        converted to a standard regex with the <OpenTabsAPICodeLink sectionID="construct" /> method.
         </p>
         <p>String arguments will automatically be escaped, while 
           regex and RXP constructors are accepted as is.
@@ -80,8 +79,7 @@ sample.or("this", "that").construct()
     key: "construct",
     description:
       <p>Transforms the RXP constructor into a standard regex, 
-        while correctly reconstructing 
-        <OpenTabsAPICodeLink sectionID="isVariable" overWrite="variables"/>. 
+        while correctly reconstructing <OpenTabsAPICodeLink sectionID="isVariable" overWrite="variables"/>. 
         Regex flags can be specified as arguments passed to the function.
       </p>,
     codeSample: `sample.construct()
@@ -217,8 +215,7 @@ const step4Data: APIKeyData[] = [
       <p>Marks the search text as a regex variable. 
         This variable can then be used multiple times in a new 
         RXP constructor.</p> 
-      <p>RXP will parse the variables when the 
-        <OpenTabsAPICodeLink sectionID="construct" /> method 
+      <p>RXP will parse the variables when the <OpenTabsAPICodeLink sectionID="construct" /> method 
         is called and reconfigure them based on the order of usage so 
         that they will work as expected.
       </p>

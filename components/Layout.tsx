@@ -156,7 +156,7 @@ const Layout = ({ children, pageTitle, title, sizing = "standard" }: Props) => (
         .guide-section {
           display: flex;
           flex-direction: column;
-          padding: 1em 1em 1.5em 0;
+          padding: 1em 1em 1.5em;
         }
         .section-title {
           text-align: center;

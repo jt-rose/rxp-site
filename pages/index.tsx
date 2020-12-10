@@ -3,7 +3,6 @@ import { RXPexamples } from "../utils/examples";
 import { CodeSample } from "../components/CodeSample";
 
 import { FaChevronCircleRight } from "react-icons/fa";
-import theme from "../styles/theme";
 
 const ExampleSectionDivider = () => (
       <div>

@@ -3,7 +3,6 @@ import Link from "next/link";
 import theme from "../styles/theme";
 
 import { regexData, specialCharData } from "../utils/regexData";
-import { CodeSample } from "../components/CodeSample";
 
 const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
   const { regexName, APILink } = props;
@@ -39,30 +38,20 @@ const RegexGuidePage = () => (
       <thead>
         <tr>
         <th>Symbol</th>
-      <th className="hide-on-mobile">Name</th>
+      <th>Name</th>
       <th>Description</th>
-      <th className="hide-on-mobile">Example</th>
+      <th>Example</th>
         </tr>
       </thead>
       <tbody>
       {regexData.map(data => (
         <tr id={data.name.replace(/ /g, "-")}>
           <td>{data.symbol}</td>
-          <td className="hide-on-mobile">
+          <td>
             <OptionalLink regexName={data.name} APILink={data.APILink}/>
           </td>
-          <td>
-            <div>
-              <span className="show-on-mobile">
-                <OptionalLink regexName={data.name} APILink={data.APILink}/>
-              </span>
-              {data.description}
-              <span className="show-on-mobile">
-              <br />
-              <CodeSample sample={`/${data.example}/`} />
-              </span>
-            </div></td>
-          <td className="hide-on-mobile"><CodeSample sample={`/${data.example}/`} /></td>
+          <td>{data.description}</td>
+          <td>{data.example}</td>
         </tr>
       ))}
       </tbody>
@@ -73,7 +62,7 @@ const RegexGuidePage = () => (
       <thead>
         <tr>
         <th>Symbol</th>
-      <th className="hide-on-mobile">Name</th>
+      <th>Name</th>
       <th>Description</th>
         </tr>
       </thead>
@@ -81,15 +70,11 @@ const RegexGuidePage = () => (
       {specialCharData.map(data => (
         <tr id={data.name.replace(/ /g, "-")}>
         <td>{data.symbol}</td>
-        <td className="hide-on-mobile">
+        <td>
           <OptionalLink regexName={data.name} APILink={data.APILink}/>
         </td>
-        <td>
-          <span className="show-on-mobile">
-            <OptionalLink regexName={data.name} APILink={data.APILink}/>
-          </span>
-          {data.description}</td>
-      </tr>
+        <td>{data.description}</td>
+    </tr>
       ))}
       </tbody>
     </table>
@@ -120,20 +105,6 @@ const RegexGuidePage = () => (
       }
     p, h2 {
       text-align: center;
-    }
-    .show-on-mobile {
-      display: block;
-    }
-    .hide-on-mobile {
-      display: none;
-    }
-    @media (min-width: 700px) {
-      .show-on-mobile {
-        display: none;
-      }
-      .hide-on-mobile {
-        display: block;
-      }
     }
       `}</style>
   </Layout>

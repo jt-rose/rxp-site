@@ -1,11 +1,11 @@
-interface SpecialCharData {
+export interface SpecialCharData {
     symbol: string;
     name: string;
     description: string;
     APILink: string | null;
 }
 
-interface RegexDataObj extends SpecialCharData {
+export interface RegexDataObj extends SpecialCharData {
     example: string;
 }
 

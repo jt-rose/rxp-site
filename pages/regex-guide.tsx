@@ -39,7 +39,7 @@ const RegexGuidePage = () => (
       <thead>
         <tr>
         <th>Symbol</th>
-      <th>Name</th>
+      <th className="hide-on-mobile">Name</th>
       <th>Description</th>
       <th className="hide-on-mobile">Example</th>
         </tr>
@@ -48,11 +48,14 @@ const RegexGuidePage = () => (
       {regexData.map(data => (
         <tr id={data.name.replace(/ /g, "-")}>
           <td>{data.symbol}</td>
-          <td>
+          <td className="hide-on-mobile">
             <OptionalLink regexName={data.name} APILink={data.APILink}/>
           </td>
           <td>
             <div>
+              <span className="show-on-mobile">
+                <OptionalLink regexName={data.name} APILink={data.APILink}/>
+              </span>
               {data.description}
               <span className="show-on-mobile">
               <br />
@@ -70,7 +73,7 @@ const RegexGuidePage = () => (
       <thead>
         <tr>
         <th>Symbol</th>
-      <th>Name</th>
+      <th className="hide-on-mobile">Name</th>
       <th>Description</th>
         </tr>
       </thead>
@@ -78,10 +81,14 @@ const RegexGuidePage = () => (
       {specialCharData.map(data => (
         <tr id={data.name.replace(/ /g, "-")}>
         <td>{data.symbol}</td>
-        <td>
+        <td className="hide-on-mobile">
           <OptionalLink regexName={data.name} APILink={data.APILink}/>
         </td>
-        <td>{data.description}</td>
+        <td>
+          <span className="show-on-mobile">
+            <OptionalLink regexName={data.name} APILink={data.APILink}/>
+          </span>
+          {data.description}</td>
       </tr>
       ))}
       </tbody>
@@ -120,7 +127,7 @@ const RegexGuidePage = () => (
     .hide-on-mobile {
       display: none;
     }
-    @media(min-width: 700) {
+    @media (min-width: 700px) {
       .show-on-mobile {
         display: none;
       }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import theme from "../styles/theme";
 
 import { regexData, specialCharData } from "../utils/regexData";
+import { CodeSample } from "../components/CodeSample";
 
 const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
   const { regexName, APILink } = props;
@@ -33,7 +34,7 @@ const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
 const RegexGuidePage = () => (
   <Layout title="Regex Guide" pageTitle="Regex Guide">
     <p>A quick reference guide to common regex characters</p>
-    <h2 className="nunito-font">Regex Behavior Modifiers</h2>
+    <h2 className="nunito-font">Regex Search Modifiers</h2>
     <table>
       <thead>
         <tr>
@@ -51,7 +52,7 @@ const RegexGuidePage = () => (
             <OptionalLink regexName={data.name} APILink={data.APILink}/>
           </td>
           <td>{data.description}</td>
-          <td>{data.example}</td>
+          <td><CodeSample sample={`/${data.example}/`} /></td>
         </tr>
       ))}
       </tbody>
@@ -81,7 +82,7 @@ const RegexGuidePage = () => (
       <style jsx>{`
         table {
           border-collapse: collapse;
-          margin: 25px;
+          margin: 25px 10px;
           font-size: 0.9em;
           min-width: 400px;
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)

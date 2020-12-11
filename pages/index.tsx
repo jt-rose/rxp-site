@@ -42,6 +42,7 @@ const Examples = () => (
       <style jsx>{`
           ul {
               list-style-type: none;
+              padding-left: 0;
           }
           h3, p {
             text-align: center;

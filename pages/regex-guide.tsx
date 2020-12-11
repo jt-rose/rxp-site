@@ -41,7 +41,7 @@ const RegexGuidePage = () => (
         <th>Symbol</th>
       <th>Name</th>
       <th>Description</th>
-      <th>Example</th>
+      <th className="hide-on-mobile">Example</th>
         </tr>
       </thead>
       <tbody>
@@ -51,8 +51,15 @@ const RegexGuidePage = () => (
           <td>
             <OptionalLink regexName={data.name} APILink={data.APILink}/>
           </td>
-          <td>{data.description}</td>
-          <td><CodeSample sample={`/${data.example}/`} /></td>
+          <td>
+            <div>
+              {data.description}
+              <span className="show-on-mobile">
+              <br />
+              <CodeSample sample={`/${data.example}/`} />
+              </span>
+            </div></td>
+          <td className="hide-on-mobile"><CodeSample sample={`/${data.example}/`} /></td>
         </tr>
       ))}
       </tbody>
@@ -106,6 +113,20 @@ const RegexGuidePage = () => (
       }
     p, h2 {
       text-align: center;
+    }
+    .show-on-mobile {
+      display: block;
+    }
+    .hide-on-mobile {
+      display: none;
+    }
+    @media(min-width: 700) {
+      .show-on-mobile {
+        display: none;
+      }
+      .hide-on-mobile {
+        display: block;
+      }
     }
       `}</style>
   </Layout>

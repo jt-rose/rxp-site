@@ -96,7 +96,7 @@ const IndexPage = () => (
     ].map((x) => (
       <li key={`${x.title}-key`}>
         <h3 className="nunito-font">
-          <FaChevronCircleRight style={{marginRight: "1em", width: "24.5px"}}/>
+          <FaChevronCircleRight style={{marginRight: "1em", flexShrink: 0 }}/>
           {x.title}
         </h3>
         {x.content}

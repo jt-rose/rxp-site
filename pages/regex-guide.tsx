@@ -1,39 +1,17 @@
 import Layout from "../components/Layout";
-import Link from "next/link";
+import { OptionalLink } from "../components/CodeLink";
+import { TableCardGroup } from "../components/TableCard";
 import theme from "../styles/theme";
 
 import { regexData, specialCharData } from "../utils/regexData";
 
-const OptionalLink = (props: {regexName: string, APILink: string | null}) => {
-  const { regexName, APILink } = props;
-  if (APILink) {
-    return (
-      <div>
-        <Link href={`/api-guide#${APILink}`}>
-        <a>{regexName}</a>
-      </Link>
-        <style jsx>{`
-          a {
-          text-decoration: none;
-          color: ${theme.colors.background};
-          font-weight: bold;
-        }
-      `}</style>
-      </div>
-    );
-  } else {
-    return (
-      <>
-        {regexName}
-      </>
-    );
-  }
-};
+
 
 const RegexGuidePage = () => (
   <Layout title="Regex Guide" pageTitle="Regex Guide">
     <p>A quick reference guide to common regex characters</p>
     <h2 className="nunito-font">Regex Search Modifiers</h2>
+    <TableCardGroup data={regexData}/>
     <table>
       <thead>
         <tr>
@@ -58,6 +36,7 @@ const RegexGuidePage = () => (
     </table>
     <br />
     <h2 className="nunito-font">Special Characters</h2>
+    <TableCardGroup data={specialCharData} />
     <table>
       <thead>
         <tr>
@@ -80,11 +59,17 @@ const RegexGuidePage = () => (
     </table>
       <style jsx>{`
         table {
+          display: none;
           border-collapse: collapse;
           margin: 25px 10px;
           font-size: 0.9em;
           min-width: 400px;
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+        }
+        @media (min-width: 600px) {
+          table {
+            display: block;
+          }
         }
         thead tr {
           background-color: ${theme.colors.background};

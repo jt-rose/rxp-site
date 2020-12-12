@@ -95,7 +95,10 @@ const IndexPage = () => (
       },
     ].map((x) => (
       <li key={`${x.title}-key`}>
-        <h3 className="nunito-font"><FaChevronCircleRight style={{marginRight: "1em"}}/>{x.title}</h3>
+        <h3 className="nunito-font">
+          <FaChevronCircleRight style={{marginRight: "1em", width: "24.5px"}}/>
+          {x.title}
+        </h3>
         {x.content}
       </li>
     ))}

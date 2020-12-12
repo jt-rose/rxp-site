@@ -144,7 +144,11 @@ thisOrThat.occurs(5).construct()
       making it easy to reuse or extend them:
       </p>
       <CodeSample sample={`const name = init("Jeff")
-const namePattern = init(name.atStart, "some stuff", name.isOptional);
+const namePattern = init(
+    name.or("Jefe"), 
+    "some stuff", 
+    name.isOptional);
+
 const patternsAndPatternsOhMy = init(
     namePattern, 
     namePattern, 
@@ -184,7 +188,8 @@ sample.occursOnceOrMore.and.isGreedy.construct() // /(?:sample)+/`} />
       preset <APICodeLink sectionID="anyDigit" /> (covered below):
       </p>
       <CodeSample sample={`const regexVar = anyDigit.occurs(3).and.isVariable("var")
-init(regexVar, " with ", regexVar).construct() // /(?<var>d{3}) with //k<var>/`}/>
+init(regexVar, " with ", regexVar).construct() 
+// /(?<var>d{3}) with //k<var>/`}/>
       </GuideSection>
 );
 

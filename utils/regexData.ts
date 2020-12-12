@@ -41,28 +41,28 @@ export const regexData: RegexDataObj[] = [
     {
         symbol: "+",
         name: "one or more (greedy)",
-        description: "Marks text as occuring once or more, using a greedy search.",
+        description: "Marks text as occuring once or more, using a greedy search",
         example: "(?:sample)+",
         APILink: "occursOnceOrMore"
     },
     {
         symbol: "+?",
         name: "one or more (lazy)",
-        description: "Marks text as occuring once or more, using a lazy search.",
+        description: "Marks text as occuring once or more, using a lazy search",
         example: "(?:sample)+?",
         APILink: "occursOnceOrMore"
     },
     {
         symbol: "*",
         name: "zero or more (greedy)",
-        description: "Marks text as occuring zero or more times, using a greedy search.",
+        description: "Marks text as occuring zero or more times, using a greedy search",
         example: "(?:sample)*",
         APILink: "occursZeroOrMore"
     },
     {
         symbol: "*?",
         name: "zero or more (lazy)",
-        description: "Marks text as occuring zero or more times, using a lazy search.",
+        description: "Marks text as occuring zero or more times, using a lazy search",
         example: "(?:sample)*?",
         APILink: "occursZeroOrMore"
     },

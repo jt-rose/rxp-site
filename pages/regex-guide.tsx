@@ -73,6 +73,7 @@ const RegexGuidePage = () => (
       #special-char-table {
         width: fit-content;
         margin: auto;
+        margin-bottom: 2rem;
       }
 
       thead tr {
